@@ -8903,3 +8903,103 @@ a:is(.active,
     height: 30px;
 }
 
+
+/* --- Profile header: pre-4.6 layout (optional / opinionated) --------------
+   4.6 rebuilt the account header as a CSS-modules component. The rules below
+   restore the older arrangement (single fields box, stats above the tabs,
+   segmented tab control). Drop this group to keep the native 4.6 look. */
+
+/* Fields: grid of separate cards -> one connected box with dividers. */
+.app-body ._comp_account_header__fieldList {
+    grid-template-columns: 1fr;
+    gap: 0;
+    border: 1px solid var(--color-lines);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-content-secondary-bg);
+}
+.app-body ._comp_account_header__fieldList ._comp_account_header__fieldItem {
+    grid-column: 1 / -1;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid var(--color-lines);
+    background: transparent;
+}
+.app-body ._comp_account_header__fieldList ._comp_account_header__fieldItem:last-child {
+    border-bottom: 0;
+}
+.app-body ._comp_account_header__fieldItem dd a {
+    color: var(--color-accent);
+}
+/* Stats: move below the bio (above the tabs); value+label inline; hide "Joined". */
+.app-body ._comp_account_header__barWrapper {
+    display: flex;
+    flex-direction: column;
+}
+.app-body ._comp_account_header__numberFields {
+    order: 1;
+    margin-bottom: 16px;
+}
+.app-body ._comp_account_header__numberFields ._comp_number_fields__item {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+.app-body ._comp_account_header__numberFields ._comp_number_fields__item :is(a, button, strong) {
+    order: -1;
+    font-size: inherit;
+}
+.app-body ._comp_account_header__numberFields ._comp_number_fields__item:last-child {
+    display: none;
+}
+
+/* Tabs: full-width segmented control. */
+.app-body ._comp_tab_list__tabList {
+    gap: 0;
+    padding: 0;
+    background: var(--color-accent-bg);
+    border: 1px solid var(--color-accent-lines);
+    border-left: 0;
+    border-right: 0;
+}
+.app-body ._comp_tab_list__tab {
+    position: relative;
+    flex: 1 1 0;
+    text-align: center;
+    padding: 14px 10px;
+    color: var(--color-accent);
+    font-weight: 600;
+    border: 0;
+    border-radius: 9px;
+    box-shadow: 0 0 0 4px var(--color-accent-bg) inset;
+    transition: all .2s;
+}
+.app-body ._comp_tab_list__tab:not(.active):hover {
+    background-color: var(--color-accent-lines);
+    color: var(--color-accent);
+}
+.app-body ._comp_tab_list__tab.active {
+    background-color: var(--color-content-bg);
+    color: var(--color-content-fg);
+    border-bottom: 0;
+    padding-bottom: 14px;
+    box-shadow: 0 0 0 4px var(--color-accent-bg) inset;
+}
+.app-body ._comp_tab_list__tab::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    top: 8px;
+    bottom: 8px;
+    right: -1px;
+    background-color: var(--color-accent-lines);
+    border-radius: 50px;
+}
+.app-body ._comp_tab_list__tab:last-child::after {
+    display: none;
+}
+:is(html[data-color-scheme="dark"], html:not([data-color-scheme])) {
+    .app-body ._comp_tab_list__tab.active {
+        background-color: var(--color-bg);
+    }
+}
