@@ -7790,7 +7790,8 @@ a:is(.active,
 .app-body .about__section:nth-child(5) {
     order: 5;
 }
-.app-body .about .link-footer {
+.app-body .about .link-footer,
+.app-body .about footer[data-context="about"] {
     order: 6;
 }
 .app-body .about__footer {
