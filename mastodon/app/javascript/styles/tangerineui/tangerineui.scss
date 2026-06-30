@@ -4635,6 +4635,15 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
     font-weight: bold;
     border: 0;
     z-index: 1;
+    transform-origin: center;
+    animation: t-badge-pop 500ms cubic-bezier(0.34, 1.36, 0.64, 1);
+}
+@keyframes t-badge-pop {
+    from { transform: translate(-8.2px, 12.4px) scale(0); opacity: 0; filter: blur(2px); }
+    to   { transform: translate(0, 0) scale(1); opacity: 1; filter: blur(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .app-body .icon-with-badge__badge { animation: none; }
 }
 .app-body .compose-panel hr,
 .app-body .navigation-panel .list-panel hr {
