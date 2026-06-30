@@ -6732,6 +6732,15 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 }
 .app-body .check-box__input.checked .icon-check {
     transform: scale(.5);
+    animation: checkbox-check-pop .15s ease-out;
+}
+@keyframes checkbox-check-pop {
+    from { transform: scale(0); opacity: 0; }
+    60%  { transform: scale(.6); }
+    to   { transform: scale(.5); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .app-body .check-box__input.checked .icon-check { animation: none; }
 }
 
 .app-body .dropdown-menu {
