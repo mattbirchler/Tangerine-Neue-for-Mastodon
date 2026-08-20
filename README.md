@@ -162,16 +162,16 @@ This is a list of known Mastodon instances on which Tangerine UI has been instal
 ## 3. Compatibility
 Which theme to use depends on your Mastodon version:
 
-| Mastodon version       | What to use                                                                                                                                 |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| **5.0 (in development)** | ⚠️ Unknown. Still early in development and untested; support is not guaranteed |
-| **4.8._x_ (pre-release)** | 🟡 Not officially supported yet, but tested against a recent 4.8 alpha with [**Tangerine Neue**](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/releases/latest) and everything seems to work well |
-| **4.7._x_**            | ✅ [**Tangerine Neue**](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/releases/latest), the current, actively maintained theme. This is the version the theme primarily supports and is tested against[^3][^4] |
-| **4.6._x_**            | ✅ [**Tangerine Neue**](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/releases/latest), fully supported |
-| **4.5._x_**            | [**Tangerine UI for Mastodon**](https://github.com/nileane/TangerineUI-for-Mastodon) — the original theme; use it until you can upgrade to 4.6+ |
-| **4.3._x_ – 4.4._x_**  | 🚫 Not supported by any version of the theme                                                                                                |
-| **4.1._x_ – 4.2._x_**  | [**Tangerine UI Legacy** (v1.9)](https://github.com/nileane/TangerineUI-for-Mastodon/tree/legacy) only[^5][^6]                               |
-| **4.0._x_ and older**  | 🚫 Not supported by any version of the theme                                                                                                |
+| Mastodon version          | Compatible? | Notes                                                                                                        |
+| ------------------------- | :---------: | ------------------------------------------------------------------------------------------------------------ |
+| **5.0 (in development)**  | 🚫          | Massive redesign of the platform, so 5.0 will require a big rewrite of Tangerine Neue                         |
+| **4.8._x_ (pre-release)** | 🟡          | Not officially supported yet, but tested against a 4.8 alpha with [**Tangerine Neue**](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/releases/latest) and everything seems to work well |
+| **4.7._x_**               | ✅          | [**Tangerine Neue**](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/releases/latest), the current, actively maintained theme. This is the version the theme primarily supports and is tested against[^3][^4] |
+| **4.6._x_**               | ✅          | [**Tangerine Neue**](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/releases/latest), fully supported |
+| **4.5._x_**               | 🚫          | Use [**Tangerine UI for Mastodon**](https://github.com/nileane/TangerineUI-for-Mastodon), the original theme, until you can upgrade to 4.6+ |
+| **4.3._x_ – 4.4._x_**     | 🚫          | Not supported by any version of the theme                                                                     |
+| **4.1._x_ – 4.2._x_**     | 🚫          | Use [**Tangerine UI Legacy** (v1.9)](https://github.com/nileane/TangerineUI-for-Mastodon/tree/legacy) only[^5][^6] |
+| **4.0._x_ and older**     | 🚫          | Not supported by any version of the theme                                                                     |
 
 [^3]: Tangerine Neue (v2._x_) is also compatible with instances running a version of **Glitch-soc** based on the current stable release of Mastodon, as long as it is [installed as a vanilla theme](#4-installation-for-mastodon-admins) on these instances.
 [^4]: Instances running on nightly/alpha/beta builds of Mastodon are not officially supported. If you do use Tangerine Neue with an unstable version of Mastodon, feel free to [report](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/issues) UI issues as they appear. As a general rule, since the maintainer is on mastodon.social, it will tend to get updated to run whatever that instance is currently running.
