@@ -164,7 +164,10 @@ Which theme to use depends on your Mastodon version:
 
 | Mastodon version       | What to use                                                                                                                                 |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| **4.6 and later**      | ✅ [**Tangerine Neue**](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/releases/latest) — the current, actively maintained theme[^3][^4] |
+| **5.0 (in development)** | ⚠️ Unknown. Still early in development and untested; support is not guaranteed |
+| **4.8._x_ (pre-release)** | 🟡 Not officially supported yet, but tested against a recent 4.8 alpha with [**Tangerine Neue**](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/releases/latest) and everything seems to work well |
+| **4.7._x_**            | ✅ [**Tangerine Neue**](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/releases/latest), the current, actively maintained theme. This is the version the theme primarily supports and is tested against[^3][^4] |
+| **4.6._x_**            | ✅ [**Tangerine Neue**](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/releases/latest), fully supported |
 | **4.5._x_**            | [**Tangerine UI for Mastodon**](https://github.com/nileane/TangerineUI-for-Mastodon) — the original theme; use it until you can upgrade to 4.6+ |
 | **4.3._x_ – 4.4._x_**  | 🚫 Not supported by any version of the theme                                                                                                |
 | **4.1._x_ – 4.2._x_**  | [**Tangerine UI Legacy** (v1.9)](https://github.com/nileane/TangerineUI-for-Mastodon/tree/legacy) only[^5][^6]                               |
