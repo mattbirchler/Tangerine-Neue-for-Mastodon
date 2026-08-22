@@ -8346,11 +8346,14 @@ a:is(.active,
     font-weight: 600;
 }
 
-.layout-multiple-columns .column:has(> .getting-started) {
+/* The nav column contained .getting-started pre-4.6; 4.6 renders
+   .navigation-panel instead — match both, otherwise the nav column
+   loses its fixed width and stretches into the leftover space. */
+.layout-multiple-columns .column:has(> .getting-started, .navigation-panel) {
     width: 330px;
 }
 .layout-multiple-columns
-    .column:has(> .getting-started)
+    .column:has(> .getting-started, .navigation-panel)
     :is(.column-header, .column-back-button),
 .layout-single-column .navigation-bar:has(+ .getting-started) {
     display: none;
@@ -8367,46 +8370,16 @@ a:is(.active,
 
 .layout-multiple-columns .drawer {
     width: 280px;
-    transition: width .3s;
 }
-.layout-multiple-columns
-    .drawer:has(> .drawer__pager > .drawer__inner > .search-results > .search-results__section) {
-        width: 400px;
-}
-.layout-multiple-columns .drawer__inner:has(> .search-results > .search-results__section) {
-    z-index: 2;
-    background-color: var(--color-content-bg);
-    border-left: 1px solid var(--color-lines);
-    border-right: 1px solid var(--color-lines);
-}
-
-.layout-multiple-columns
-    .drawer
-    > .search:has(+ .drawer__pager > .drawer__inner > .search-results > .search-results__section) {
-        margin-bottom: 0;
-}
-.layout-multiple-columns
-    .drawer
-    > .search:has(+ .drawer__pager > .drawer__inner > .search-results > .search-results__section)
-    > .search__input {
-        border-radius: 8px 8px 0 0;
-}
+/* Note: pre-4.6, search results rendered inside the drawer (which the theme
+   widened to 400px for them); 4.6 routes search results into the spare
+   column instead, so those drawer-expansion rules were removed as dead. */
 
 .layout-multiple-columns .drawer__pager {
     border-radius: 0;
     border: 0;
 }
-.layout-multiple-columns
-    .drawer
-    > .search:has(+ .drawer__pager > .drawer__inner > .search-results > .search-results__section)
-    > .search__popout {
-        border-radius: 0 0 8px 8px;
-        margin-top: 0;
-}
 
-.layout-multiple-columns .drawer__inner:has(.search-results .empty-column-indicator) {
-    z-index: 3;
-}
 .layout-multiple-columns .search-results .empty-column-indicator {
     border: 1px solid var(--color-lines);
     border-radius: 8px;
