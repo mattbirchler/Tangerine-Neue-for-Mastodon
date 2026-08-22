@@ -1008,6 +1008,7 @@ body.app-body  {
         .icon-quote-right,
         .icon-home,
         .icon-collections,
+        .icon-collection,
         .icon-notifications-active,
         .icon-hashtag,
         .icon-explore,
@@ -1097,6 +1098,7 @@ body.app-body  {
         .icon-quote-right,
         .icon-home,
         .icon-collections,
+        .icon-collection,
         .icon-notifications-active,
         .icon-hashtag,
         .icon-explore,
@@ -1215,6 +1217,19 @@ body.app-body  {
 .app-body .detailed-status__link .icon-retweet {
     background-image: var(--icon-boost);
     margin: 0;
+}
+/* Collections notifications ("added to collection", new in 4.6). Mastodon
+   renders this one as a plain inline SVG under a different class name
+   (.icon-collection, singular) than the nav icon (.icon-collections), so
+   it fell through unstyled — swap it onto our own accent icon too. */
+.app-body .notification-group__icon .icon-collection {
+    background-image: var(--icon-collections-accent);
+}
+/* The icon box (40px, centered inside) sits ~9px lower than the header
+   label's own vertical center (22px tall, margin-top 0) — nudge it up to
+   match. Confirmed live. */
+.app-body .notification-group--added_to_collection .notification-group__icon {
+    margin-top: -9px;
 }
 .app-body
     button.icon-button:is(
@@ -4390,6 +4405,12 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 .app-body .notification__filter-bar .active .icon-home {
     background-image: var(--icon-post-notification);
 }
+.app-body .notification__filter-bar .icon-collections {
+    background-image: var(--icon-collections-accent);
+}
+.app-body .notification__filter-bar .active .icon-collections {
+    background-image: var(--icon-collections);
+}
 
 @media screen and (max-width:770px) {
     .app-body .account__header + .account__section-headline {
@@ -6212,8 +6233,22 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
         color: var(--color-content-fg);
         font-weight: 700;
 }
+/* Unlike .notification-ungrouped__header (styled a few rules above with
+   font-weight:500 + accent color), .notification-group__main__header__label
+   had no equivalent of either — removing our old content-fg override just
+   left it at browser-default plain/regular, not accent. Match the same
+   weight+color; the :is(bdi, bdi > strong) rule above still recolors just
+   the name back to dark+bold on top of this. */
 .app-body .notification-group__main__header__label {
-    color: var(--color-content-fg);
+    color: var(--color-accent);
+    font-weight: 500;
+}
+/* Only push content apart when there's a trailing <time> to right-align
+   (e.g. favourite/boost). Types without one (e.g. "added to collection")
+   have just a name + trailing description text as the two flex children,
+   and space-between shoved that description all the way to the right
+   instead of letting it flow after the name. */
+.app-body .notification-group__main__header__label:has(time) {
     justify-content: space-between;
 }
 .app-body .notification-group__main__header__label time {
