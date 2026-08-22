@@ -241,17 +241,64 @@
     --color-bg-success-base: #0a5c2f;
     }
 
+/* ♿ High-contrast mode, part 2: the block above only overrides Mastodon's
+   own semantic tokens (--color-text-*, --color-bg-*, --color-border-*).
+   Our own custom-styled components (profile header, hashtag chips, nav,
+   etc.) read the theme's OWN variables directly (--color-fg,
+   --color-content-fg, --color-lines...), which the block above never
+   touches — so most of the theme didn't actually get any contrast boost.
+   This adds boosted values for the vars that are used at low contrast by
+   design (muted text, hairline borders). Deliberately plain neutral
+   grays, not per-variant: --color-content-fg, --color-content-fg-muted,
+   and --color-lines are already identical across every variant (not
+   placeholder-substituted), and --color-fg-muted — though per-variant normally —
+   is intentionally flattened to the same neutral gray here too, since
+   maximizing legibility is the point, not matching each variant's hue.
+   Verified live on Tangerine and Granite (light + dark). */
+@media (prefers-contrast: more) {
+    :root:root {
+        --color-fg-muted: #1f1f1f;
+        --color-content-fg-muted: #2f2f2f;
+        --color-content-fg: #000000;
+        --color-lines: #4d4d4d;
+    }
+}
+:root:root[data-contrast='high'] {
+    --color-fg-muted: #1f1f1f;
+    --color-content-fg-muted: #2f2f2f;
+    --color-content-fg: #000000;
+    --color-lines: #4d4d4d;
+}
+@media (prefers-contrast: more) {
+    :root:root[data-color-scheme="dark"],
+    :root:root:not([data-color-scheme]) {
+        --color-fg-muted: #e6e6e6;
+        --color-content-fg-muted: #d4d4d4;
+        --color-content-fg: #ffffff;
+        --color-lines: #999999;
+    }
+}
+:root:root[data-color-scheme="dark"][data-contrast='high'],
+:root:root:not([data-color-scheme])[data-contrast='high'] {
+    --color-fg-muted: #e6e6e6;
+    --color-content-fg-muted: #d4d4d4;
+    --color-content-fg: #ffffff;
+    --color-lines: #999999;
+}
+
 /* Collections icon variables (added for Mastodon 4.6) */
 :root {
     --icon-collections: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%232a2d37' viewBox='0 0 256 256'%3E%3Cpath d='M224,144H136a8,8,0,0,0-8,8v56a8,8,0,0,0,8,8h88a8,8,0,0,0,8-8V152A8,8,0,0,0,224,144Zm-8,56H144V160h72ZM71.59,61.47a8,8,0,0,0-15.18,0l-40,120A8,8,0,0,0,24,192h80a8,8,0,0,0,7.59-10.53ZM35.1,176,64,89.3,92.9,176ZM208,76a52,52,0,1,0-52,52A52.06,52.06,0,0,0,208,76Zm-88,0a36,36,0,1,1,36,36A36,36,0,0,1,120,76Z'/%3E%3C/svg%3E");
     --icon-collections-accent: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%231f2127' viewBox='0 0 256 256'%3E%3Cpath d='M64,64l40,120H24ZM200,76a44,44,0,1,0-44,44A44,44,0,0,0,200,76Zm-64,76v56h88V152Z' opacity='0.2'/%3E%3Cpath d='M224,144H136a8,8,0,0,0-8,8v56a8,8,0,0,0,8,8h88a8,8,0,0,0,8-8V152A8,8,0,0,0,224,144Zm-8,56H144V160h72ZM71.59,61.47a8,8,0,0,0-15.18,0l-40,120A8,8,0,0,0,24,192h80a8,8,0,0,0,7.59-10.53ZM35.1,176,64,89.3,92.9,176ZM208,76a52,52,0,1,0-52,52A52.06,52.06,0,0,0,208,76Zm-88,0a36,36,0,1,1,36,36A36,36,0,0,1,120,76Z'/%3E%3C/svg%3E");
     --icon-collections-accent-active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%231f2127' viewBox='0 0 256 256'%3E%3Cpath d='M111.59,181.47A8,8,0,0,1,104,192H24a8,8,0,0,1-7.59-10.53l40-120a8,8,0,0,1,15.18,0ZM208,76a52,52,0,1,0-52,52A52.06,52.06,0,0,0,208,76Zm16,68H136a8,8,0,0,0-8,8v56a8,8,0,0,0,8,8h88a8,8,0,0,0,8-8V152A8,8,0,0,0,224,144Z'/%3E%3C/svg%3E");
+    --icon-collections-gray: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%232a2d37' viewBox='0 0 256 256'%3E%3Cpath d='M64,64l40,120H24ZM200,76a44,44,0,1,0-44,44A44,44,0,0,0,200,76Zm-64,76v56h88V152Z' opacity='0.2'/%3E%3Cpath d='M224,144H136a8,8,0,0,0-8,8v56a8,8,0,0,0,8,8h88a8,8,0,0,0,8-8V152A8,8,0,0,0,224,144Zm-8,56H144V160h72ZM71.59,61.47a8,8,0,0,0-15.18,0l-40,120A8,8,0,0,0,24,192h80a8,8,0,0,0,7.59-10.53ZM35.1,176,64,89.3,92.9,176ZM208,76a52,52,0,1,0-52,52A52.06,52.06,0,0,0,208,76Zm-88,0a36,36,0,1,1,36,36A36,36,0,0,1,120,76Z'/%3E%3C/svg%3E");
 }
 :root[data-color-scheme="dark"],
 :root:not([data-color-scheme]) {
         --icon-collections: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%23ffffff' viewBox='0 0 256 256'%3E%3Cpath d='M224,144H136a8,8,0,0,0-8,8v56a8,8,0,0,0,8,8h88a8,8,0,0,0,8-8V152A8,8,0,0,0,224,144Zm-8,56H144V160h72ZM71.59,61.47a8,8,0,0,0-15.18,0l-40,120A8,8,0,0,0,24,192h80a8,8,0,0,0,7.59-10.53ZM35.1,176,64,89.3,92.9,176ZM208,76a52,52,0,1,0-52,52A52.06,52.06,0,0,0,208,76Zm-88,0a36,36,0,1,1,36,36A36,36,0,0,1,120,76Z'/%3E%3C/svg%3E");
         --icon-collections-accent: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%23c9cdd6' viewBox='0 0 256 256'%3E%3Cpath d='M64,64l40,120H24ZM200,76a44,44,0,1,0-44,44A44,44,0,0,0,200,76Zm-64,76v56h88V152Z' opacity='0.2'/%3E%3Cpath d='M224,144H136a8,8,0,0,0-8,8v56a8,8,0,0,0,8,8h88a8,8,0,0,0,8-8V152A8,8,0,0,0,224,144Zm-8,56H144V160h72ZM71.59,61.47a8,8,0,0,0-15.18,0l-40,120A8,8,0,0,0,24,192h80a8,8,0,0,0,7.59-10.53ZM35.1,176,64,89.3,92.9,176ZM208,76a52,52,0,1,0-52,52A52.06,52.06,0,0,0,208,76Zm-88,0a36,36,0,1,1,36,36A36,36,0,0,1,120,76Z'/%3E%3C/svg%3E");
         --icon-collections-accent-active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%23c9cdd6' viewBox='0 0 256 256'%3E%3Cpath d='M111.59,181.47A8,8,0,0,1,104,192H24a8,8,0,0,1-7.59-10.53l40-120a8,8,0,0,1,15.18,0ZM208,76a52,52,0,1,0-52,52A52.06,52.06,0,0,0,208,76Zm16,68H136a8,8,0,0,0-8,8v56a8,8,0,0,0,8,8h88a8,8,0,0,0,8-8V152A8,8,0,0,0,224,144Z'/%3E%3C/svg%3E");
+        --icon-collections-gray: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%23ffffff' viewBox='0 0 256 256'%3E%3Cpath d='M64,64l40,120H24ZM200,76a44,44,0,1,0-44,44A44,44,0,0,0,200,76Zm-64,76v56h88V152Z' opacity='0.2'/%3E%3Cpath d='M224,144H136a8,8,0,0,0-8,8v56a8,8,0,0,0,8,8h88a8,8,0,0,0,8-8V152A8,8,0,0,0,224,144Zm-8,56H144V160h72ZM71.59,61.47a8,8,0,0,0-15.18,0l-40,120A8,8,0,0,0,24,192h80a8,8,0,0,0,7.59-10.53ZM35.1,176,64,89.3,92.9,176ZM208,76a52,52,0,1,0-52,52A52.06,52.06,0,0,0,208,76Zm-88,0a36,36,0,1,1,36,36A36,36,0,0,1,120,76Z'/%3E%3C/svg%3E");
     }
 .app-body {
     --background-color: var(--color-bg);
@@ -3203,6 +3250,32 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 }
 .app-body .hashtag-bar a:hover span {
     text-decoration: none;
+}
+
+/* Hashtag filter chips (4.6 "Posts and boosts" filter on the account timeline) */
+.app-body ._comp_tags__tag {
+    font: inherit;
+    font-weight: 500;
+    color: var(--color-content-fg-muted);
+    background-color:
+        color-mix(
+            in srgb,
+            var(--color-content-fg),
+            transparent 92%
+        );
+    border: 0;
+    padding: 3px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .3s;
+}
+.app-body ._comp_tags__tag:hover {
+    color: var(--color-accent);
+    background-color: var(--color-accent-bg);
+}
+.app-body ._comp_tags__tag[aria-pressed="true"] {
+    color: var(--color-accent-fg);
+    background-color: var(--color-accent);
 }
 
 /* ⭐ Action bar */
@@ -7145,6 +7218,8 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 }
 .app-body .actions-modal {
     background-color: var(--color-content-bg);
+    border-radius: 8px;
+    overflow: hidden;
 }
 .app-body .actions-modal :is(a, button) {
     color: var(--color-content-fg);
@@ -9073,3 +9148,69 @@ a:is(.active,
     height: 30px;
 }
 
+
+/* Collections "Created by you / Featuring you" tab-list. Root cause
+   confirmed live: ._feat_collections__header has display:flex and a
+   fixed computed width (565px) set by Mastodon's own Collections CSS
+   chunk — which is route-lazy-loaded, so it lands AFTER our theme CSS in
+   the cascade and wins on source order even though our width:100% rule
+   isn't lower specificity. !important forces our override regardless of
+   load order. */
+.app-body ._feat_collections__header {
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+.app-body ._feat_collections__header ._comp_tab_list__tabList {
+    width: 100% !important;
+}
+
+/* Handle explainer popover ("Handle je jako e-mailová adresa") on the profile
+   header — unstyled by default, so match the dropdown-menu look. */
+.app-body ._comp_account_header__handleHelp {
+    background-color: var(--color-content-bg);
+    color: var(--color-content-fg);
+    border: 1px solid var(--color-lines);
+    border-radius: 8px;
+}
+.app-body .icon-help {
+    width: 14px;
+    height: 14px;
+}
+
+/* Collection share modal: "Post on Mastodon" / "Share to…" ship as light
+   "button-secondary" too; make them solid accent like other primary actions. */
+.app-body ._collections_components_share_modal__shareButtonWrapper .button.button-secondary {
+    background-color: var(--color-accent);
+    color: var(--color-accent-fg);
+    border-color: var(--color-accent);
+}
+.app-body ._collections_components_share_modal__shareButtonWrapper .button.button-secondary:is(:hover, :active, :focus) {
+    background-color: var(--color-accent-focus);
+    border-color: var(--color-accent-focus);
+}
+
+/* "Your Collections" is a bare <h1>, so it renders at the browser's default
+   h1 size/margin. Match the column-header title text format used elsewhere
+   (e.g. "Populární"): font-size 16px, font-weight 700, plus the same icon
+   treatment (a gray duotone Collections icon, scaled like column-header__icon). */
+.app-body ._feat_collections__heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding-left: 15px;
+    font-size: 16px;
+    font-weight: 700;
+}
+.app-body ._feat_collections__heading::before {
+    content: "";
+    display: block;
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    transform: scale(1.2);
+    background-image: var(--icon-collections-gray);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
