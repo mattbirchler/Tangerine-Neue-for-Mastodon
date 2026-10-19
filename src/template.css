@@ -150,7 +150,9 @@
     --color-border-warning-soft: color-mix(in srgb, var(--color-warning), transparent 50%);
     --color-border-error-soft: color-mix(in srgb, var(--color-reject), transparent 50%);
     --color-border-media: rgba(255, 255, 255, 0.15);
+}
 
+:root:root[data-density] {
     --base-color-bg: var(--color-content-bg);
     --base-color-bg-desktop: var(--color-bg);
     --base-color-fg: var(--color-content-fg);
