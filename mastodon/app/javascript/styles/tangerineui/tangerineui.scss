@@ -4000,9 +4000,6 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 html[data-density] .app-body [class*="_comp_status__isMessage"] {
     background-color: color-mix(in srgb, var(--color-accent), var(--color-content-bg) 96%);
 }
-html[data-density] .app-body [class*="_comp_status__isMessage"]::before {
-    display: none;
-}
 .app-body .status__wrapper.status__wrapper-direct:has(.status__content:hover),
 .app-body .status__wrapper.status__wrapper-direct:has(.status__content:hover) .status__avatar,
 .app-body .status__wrapper.status__wrapper-direct.focusable:focus,
