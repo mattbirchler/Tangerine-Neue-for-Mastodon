@@ -164,9 +164,8 @@ Which theme to use depends on your Mastodon version:
 
 | Mastodon version          | Compatible? | Notes                                                                                                        |
 | ------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------ |
-| **5.0 (in development)**  | No          | Massive redesign of the platform, so 5.0 will require a big rewrite of Tangerine Neue                         |
-| **4.8._x_ (pre-release)** | Unofficial | Not officially supported yet, but tested against a 4.8 alpha with [**Tangerine Neue**](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/releases/latest) and everything seems to work well |
-| **4.7._x_**               | Yes         | [**Tangerine Neue**](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/releases/latest)[^3][^4] |
+| **5.0 (redesigned web interface, rolling out from October 2026)** | Beta | [**Tangerine Neue 3.0 beta**](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/releases). The same CSS files work on 4.6, 4.7 and 5.0, so you do not need a separate copy. Please [report](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/issues) anything that looks off on the new interface. |
+| **4.7._x_**               | Yes         | [**Tangerine Neue**](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/releases/latest)[^3][^4], fully supported |
 | **4.6._x_**               | Yes         | [**Tangerine Neue**](https://github.com/mattbirchler/Tangerine-Neue-for-Mastodon/releases/latest), fully supported |
 | **4.5._x_**               | No          | Use [**Tangerine UI for Mastodon**](https://github.com/nileane/TangerineUI-for-Mastodon), the original theme, until you can upgrade to 4.6+ |
 | **4.3._x_ – 4.4._x_**     | No          | Not supported by any version of the theme                                                                     |
