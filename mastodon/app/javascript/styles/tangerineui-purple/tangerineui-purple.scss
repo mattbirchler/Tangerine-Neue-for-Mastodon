@@ -150,6 +150,27 @@
     --color-border-warning-soft: color-mix(in srgb, var(--color-warning), transparent 50%);
     --color-border-error-soft: color-mix(in srgb, var(--color-reject), transparent 50%);
     --color-border-media: rgba(255, 255, 255, 0.15);
+
+    --base-color-bg: var(--color-content-bg);
+    --base-color-bg-desktop: var(--color-bg);
+    --base-color-fg: var(--color-content-fg);
+    --base-color-fg-on-accent: var(--color-accent-fg);
+    --base-color-accent: var(--color-accent);
+    --base-color-danger: var(--color-reject);
+    --base-highlight-strength: 10%;
+    --color-bg-desktop: var(--color-bg);
+    --color-bg-highlight: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    --color-border-strong: var(--color-fg);
+    --color-border-input: var(--color-lines);
+    --shadow-strength-primary: 12%;
+    --color-shadow-primary: color-mix(in srgb, #000000 var(--shadow-strength-primary), transparent);
+    --overlay-icon-shadow: drop-shadow(0 0 8px var(--color-shadow-primary));
+    --color-graph-primary-stroke: var(--color-accent);
+    --color-graph-primary-fill: var(--color-content-bg-focus);
+    --color-graph-warning-stroke: var(--color-warning);
+    --color-graph-warning-fill: var(--color-warning-bg);
+    --color-graph-disabled-stroke: var(--color-fg-muted);
+    --color-graph-disabled-fill: var(--color-secondary-bg);
 }
 
 /* A11y: dark-mode default-theme contrast fixes */
@@ -163,6 +184,7 @@
         --color-bg-error-base: #c0203c;
         --color-bg-warning-base: #7a4d00;
         --color-bg-success-base: #0a6e38;
+        --shadow-strength-primary: 45%;
 }
 
 /* ♿ High-contrast mode (OS prefers-contrast + Mastodon data-contrast) */
@@ -3268,11 +3290,11 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
     :is(button, .status__action-bar__dropdown) {
         transition: all .3s;
 }
-.app-body .status__action-bar__button-wrapper:last-child {
+.app-body .status__action-bar > .status__action-bar__button-wrapper:last-child {
     position: absolute;
     inset-inline-end: 18px;
 }
-.app-body .notification-ungrouped .status__action-bar__button-wrapper:last-child {
+.app-body .notification-ungrouped .status__action-bar > .status__action-bar__button-wrapper:last-child {
     inset-inline-end: 23px;
 }
 
@@ -3290,7 +3312,7 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
         background-color: transparent;
 }
 
-.app-body .status__action-bar__button-wrapper:last-child .icon-button:is(.active, .active:active, .active:focus),
+.app-body .status__action-bar > .status__action-bar__button-wrapper:last-child .icon-button:is(.active, .active:active, .active:focus),
 .app-body :is(.detailed-status__action-bar-dropdown, .status__action-bar-dropdown) .icon-button:is(.active, .active:active, .active:focus) {
     background-color: var(--color-accent);
     transform: scale(.9);
@@ -3802,7 +3824,7 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 .app-body .spoiler-button:hover ~ .media-gallery__item > .media-gallery__preview {
     outline: 1px solid var(--color-lines-translucent);
 }
-.app-body .media-gallery__actions__pill {
+.app-body .media-gallery__actions__pill:not([class*="_comp_button_redesign"]) {
     border-radius: 6px;
     padding: 3px 8px;
     font-weight: 500;
@@ -3823,7 +3845,7 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
     font-weight: bold;
 }
 
-.app-body :is(.media-gallery__alt__label, .media-gallery__gifv__label) {
+.app-body :is(.media-gallery__alt__label, .media-gallery__gifv__label):not([class*="_comp_button_redesign"]) {
     background-color: rgba(0, 0, 0, .1);
     border-radius: 6px;
 }
