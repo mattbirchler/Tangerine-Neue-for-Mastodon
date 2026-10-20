@@ -994,6 +994,9 @@ body.app-body  {
         border: 1px solid var(--color-lines);
         border-bottom: 0;
     }
+    .app-body [class*="_comp_column_header__root"]::after {
+        inset-inline: 1px;
+    }
 }
 .app-body .dismissable-banner + .scrollable {
     border-top-left-radius: 0;
