@@ -3436,7 +3436,7 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
         --tng-pop: 1;
     }
     :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"][aria-pressed="true"] {
-        transition: background-color .2s, color .2s, opacity .2s, --tng-pop .85s linear;
+        transition: background-color .2s, color .2s, opacity .2s, scale 450ms var(--tng-spring), --tng-pop .85s linear;
     }
     :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_status__actionsButtonGap"][aria-pressed="true"] > svg {
         scale: calc(1 + .55 * sin(var(--tng-pop) * 540deg) * (1 - var(--tng-pop)) * (1 - var(--tng-pop)));
@@ -3446,14 +3446,14 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
         --tng-burst-color-alt: color-mix(in srgb, var(--color-accent), var(--color-content-fg-bold) 25%);
     }
     :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]:not([class*="_comp_status__actionsButtonGap"], [class*="_comp_button_redesign__iconOnly"])[aria-pressed="true"] {
-        transition: background-color .2s, color .2s, opacity .2s, --tng-pop .9s cubic-bezier(.2, 1.25, .4, 1);
+        transition: background-color .2s, color .2s, opacity .2s, scale 450ms var(--tng-spring), --tng-pop .9s cubic-bezier(.2, 1.25, .4, 1);
     }
     :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]:not([class*="_comp_status__actionsButtonGap"], [class*="_comp_button_redesign__iconOnly"])[aria-pressed="true"] > svg {
         rotate: calc(var(--tng-pop) * 360deg);
         scale: calc(1 + .35 * sin(min(var(--tng-pop), 1) * 180deg));
     }
     :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__iconOnly"][aria-pressed="true"] {
-        transition: background-color .2s, color .2s, opacity .2s, --tng-pop .6s linear;
+        transition: background-color .2s, color .2s, opacity .2s, scale 450ms var(--tng-spring), --tng-pop .6s linear;
     }
     :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__iconOnly"][aria-pressed="true"] > svg {
         translate: 0 calc(-7px * sin(min(var(--tng-pop) * 1.6, 1) * 180deg));
@@ -7245,6 +7245,114 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
 @keyframes t-modal-open {
     from { opacity: 0; scale: 0.96; }
     to   { opacity: 1; scale: 1; }
+}
+@property --tng-nav {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body [class*="_comp_button_redesign__base"] {
+        transition: background-color 200ms, color 200ms, opacity 200ms, scale 450ms var(--tng-spring);
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_button_redesign__base"]:active:not(:disabled, [aria-disabled="true"]) {
+        scale: 0.92;
+        transition: background-color 200ms, color 200ms, opacity 200ms, scale 90ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+    }
+    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__link"].active {
+        --tng-nav: 1;
+        transition: background-color 200ms, color 200ms, --tng-nav 550ms linear;
+    }
+    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__link"].active [class*="_navigation_panel_redesign_navigation_link__icon"] > svg {
+        scale: calc(1 + .45 * sin(var(--tng-nav) * 540deg) * (1 - var(--tng-nav)) * (1 - var(--tng-nav)));
+        rotate: calc(-12deg * sin(var(--tng-nav) * 360deg) * (1 - var(--tng-nav)));
+    }
+    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__link"]:active {
+        scale: 0.97;
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_menu__card"] {
+        animation:
+            t-menu-spring 350ms var(--tng-spring),
+            t-fade-in 150ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="bottom"] { transform-origin: top center; }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="top"] { transform-origin: bottom center; }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="left"] { transform-origin: right center; }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="right"] { transform-origin: left center; }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-start"] { transform-origin: top left; }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-end"] { transform-origin: top right; }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="top-start"] { transform-origin: bottom left; }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="top-end"] { transform-origin: bottom right; }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-start"] { transform-origin: top right; }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-end"] { transform-origin: top left; }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-start"] { transform-origin: bottom right; }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-end"] { transform-origin: bottom left; }
+    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__badge"],
+    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__iconWithDot"]::after {
+        animation:
+            t-pop-in 450ms var(--tng-spring),
+            t-fade-in 120ms ease-out;
+    }
+    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__link"]:has([class*="_navigation_panel_redesign_navigation_link__badge"], [class*="_navigation_panel_redesign_navigation_link__iconWithDot"]) [class*="_navigation_panel_redesign_navigation_link__icon"] > svg {
+        transform-origin: 50% 10%;
+        animation: t-bell-wiggle 700ms ease-in-out 150ms;
+    }
+    :root:not(.reduce-motion) .app-body .poll__number {
+        animation: t-rise-in 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    :root:not(.reduce-motion) .app-body .poll li:nth-child(2) .poll__number { animation-delay: 40ms; }
+    :root:not(.reduce-motion) .app-body .poll li:nth-child(3) .poll__number { animation-delay: 80ms; }
+    :root:not(.reduce-motion) .app-body .poll li:nth-child(4) .poll__number { animation-delay: 120ms; }
+    :root:not(.reduce-motion) .app-body .poll__voted__mark {
+        animation: t-pop-in 450ms var(--tng-spring) 150ms both;
+    }
+    :root:not(.reduce-motion) .app-body .poll__option:has(+ .poll__chart.leading) {
+        animation: t-trophy-pop 500ms var(--tng-spring) 350ms both;
+    }
+    .app-body .poll__chart.leading {
+        overflow: hidden;
+    }
+    :root:not(.reduce-motion) .app-body .poll__chart.leading::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(100deg, transparent 20%, rgb(255 255 255 / .55) 50%, transparent 80%);
+        translate: -100% 0;
+        animation: t-shine 900ms cubic-bezier(0.22, 1, 0.36, 1) 500ms;
+    }
+}
+@keyframes t-menu-spring {
+    from { scale: 0.9; }
+    to   { scale: 1; }
+}
+@keyframes t-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes t-pop-in {
+    from { scale: 0; }
+    to   { scale: 1; }
+}
+@keyframes t-rise-in {
+    from { opacity: 0; translate: 0 6px; filter: blur(2px); }
+    to   { opacity: 1; translate: 0 0; filter: blur(0); }
+}
+@keyframes t-trophy-pop {
+    from { background-size: 0; }
+    to   { background-size: 20px; }
+}
+@keyframes t-shine {
+    from { translate: -100% 0; }
+    to   { translate: 100% 0; }
+}
+@keyframes t-bell-wiggle {
+    0%   { rotate: 0deg; }
+    15%  { rotate: 16deg; }
+    30%  { rotate: -13deg; }
+    45%  { rotate: 9deg; }
+    60%  { rotate: -6deg; }
+    75%  { rotate: 3deg; }
+    100% { rotate: 0deg; }
 }
 @keyframes t-spring-rise {
     from { translate: 0 48px; scale: 0.92; }
