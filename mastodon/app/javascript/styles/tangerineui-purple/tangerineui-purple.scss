@@ -18,6 +18,11 @@
     --meta: 'Tangerine UI for Mastodon: ' var(--version) ' \00B7 ' var(--variant);
 }
 
+/* 🌀 Motion */
+:root {
+    --tng-spring: linear(0, 0.039, 0.139, 0.276, 0.429, 0.583, 0.726, 0.85, 0.951, 1.029, 1.083, 1.116, 1.131, 1.133, 1.124, 1.108, 1.089, 1.068, 1.048, 1.03, 1.014, 1.002, 0.993, 0.987, 0.983, 0.982, 0.983, 0.984, 0.986, 0.989, 0.992, 0.995, 0.997, 0.999, 1, 1.001, 1.002, 1.002, 1.002, 1.002, 1);
+}
+
 /* 🎨 Colors */
 :root {
     color-scheme: light dark;
@@ -7234,8 +7239,8 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
 .app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_compose_redesign_trigger__composerMinimized"]) {
     transform-origin: bottom center;
     animation:
-        t-spring-rise 800ms linear(0, 0.039, 0.139, 0.276, 0.429, 0.583, 0.726, 0.85, 0.951, 1.029, 1.083, 1.116, 1.131, 1.133, 1.124, 1.108, 1.089, 1.068, 1.048, 1.03, 1.014, 1.002, 0.993, 0.987, 0.983, 0.982, 0.983, 0.984, 0.986, 0.989, 0.992, 0.995, 0.997, 0.999, 1, 1.001, 1.002, 1.002, 1.002, 1.002, 1),
-        t-fade-unblur 220ms cubic-bezier(0.22, 1, 0.36, 1);
+        t-spring-rise 400ms var(--tng-spring),
+        t-fade-unblur 150ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 @keyframes t-modal-open {
     from { opacity: 0; scale: 0.96; }
