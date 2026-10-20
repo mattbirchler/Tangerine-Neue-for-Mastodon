@@ -152,12 +152,14 @@
     --color-border-media: rgba(255, 255, 255, 0.15);
 }
 
-:root:root[data-density] {
+:root:root:is([data-theme-color], :has([class*="_comp_columns_area_"])) {
     --base-color-bg: var(--color-content-bg);
     --base-color-bg-desktop: var(--color-bg);
     --base-color-fg: var(--color-content-fg);
     --base-color-fg-on-accent: var(--color-accent-fg);
     --base-color-accent: var(--color-accent);
+    --base-color-bg-accent: var(--color-accent);
+    --base-color-fg-accent: var(--color-accent);
     --base-color-danger: var(--color-reject);
     --base-highlight-strength: 10%;
     --color-bg-desktop: var(--color-bg);
@@ -1254,10 +1256,10 @@ body.app-body  {
     background-image: var(--icon-star);
     margin: 0;
 }
-html[data-density] .app-body .icon-star {
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .icon-star {
     background-image: var(--icon-heart-accent);
 }
-html[data-density] .app-body .notification-group--favourite .icon-star {
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .notification-group--favourite .icon-star {
     background-image: var(--icon-heart-fill-accent);
 }
 .app-body .media-modal__overlay .icon-star {
@@ -3997,7 +3999,7 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 .app-body .notification-ungrouped--direct .notification-ungrouped__header {
     --color-post-bg: color-mix(in srgb, var(--color-accent), var(--color-content-bg) 96%);
 }
-html[data-density] .app-body [class*="_comp_status__isMessage"] {
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [class*="_comp_status__isMessage"] {
     background-color: color-mix(in srgb, var(--color-accent), var(--color-content-bg) 96%);
 }
 .app-body .status__wrapper.status__wrapper-direct:has(.status__content:hover),
