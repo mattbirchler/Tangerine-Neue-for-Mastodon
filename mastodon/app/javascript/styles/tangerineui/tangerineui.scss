@@ -7345,21 +7345,25 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     }
     :root:not(.reduce-motion) .app-body [class*="_comp_menu__card"] {
         animation:
-            t-menu-spring 350ms var(--tng-spring),
+            t-menu-reveal 260ms cubic-bezier(0.22, 1, 0.36, 1),
             t-fade-in 150ms cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .app-body [class*="_comp_menu__card"][data-popover-placement^="bottom"] { transform-origin: top center; }
-    .app-body [class*="_comp_menu__card"][data-popover-placement^="top"] { transform-origin: bottom center; }
-    .app-body [class*="_comp_menu__card"][data-popover-placement^="left"] { transform-origin: right center; }
-    .app-body [class*="_comp_menu__card"][data-popover-placement^="right"] { transform-origin: left center; }
-    .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-start"] { transform-origin: top left; }
-    .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-end"] { transform-origin: top right; }
-    .app-body [class*="_comp_menu__card"][data-popover-placement="top-start"] { transform-origin: bottom left; }
-    .app-body [class*="_comp_menu__card"][data-popover-placement="top-end"] { transform-origin: bottom right; }
-    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-start"] { transform-origin: top right; }
-    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-end"] { transform-origin: top left; }
-    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-start"] { transform-origin: bottom right; }
-    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-end"] { transform-origin: bottom left; }
+    :root:not(.reduce-motion) .app-body [class*="_comp_menu__card"] > * {
+        transform-origin: var(--tng-menu-origin, top center);
+        animation: t-menu-spring 350ms var(--tng-spring);
+    }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="bottom"] { --tng-menu-origin: top center; --tng-menu-from: inset(0 15% 45% 15% round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="top"] { --tng-menu-origin: bottom center; --tng-menu-from: inset(45% 15% 0 15% round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="left"] { --tng-menu-origin: right center; --tng-menu-from: inset(15% 0 15% 45% round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="right"] { --tng-menu-origin: left center; --tng-menu-from: inset(15% 45% 15% 0 round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-start"] { --tng-menu-origin: top left; --tng-menu-from: inset(0 45% 45% 0 round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-end"] { --tng-menu-origin: top right; --tng-menu-from: inset(0 0 45% 45% round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="top-start"] { --tng-menu-origin: bottom left; --tng-menu-from: inset(45% 45% 0 0 round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="top-end"] { --tng-menu-origin: bottom right; --tng-menu-from: inset(45% 0 0 45% round var(--radius-4, 16px)); }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-start"] { --tng-menu-origin: top right; --tng-menu-from: inset(0 0 45% 45% round var(--radius-4, 16px)); }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-end"] { --tng-menu-origin: top left; --tng-menu-from: inset(0 45% 45% 0 round var(--radius-4, 16px)); }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-start"] { --tng-menu-origin: bottom right; --tng-menu-from: inset(45% 0 0 45% round var(--radius-4, 16px)); }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-end"] { --tng-menu-origin: bottom left; --tng-menu-from: inset(45% 45% 0 0 round var(--radius-4, 16px)); }
     :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__badge"],
     :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__iconWithDot"]::after {
         animation:
@@ -7395,8 +7399,12 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     }
 }
 @keyframes t-menu-spring {
-    from { scale: 0.9; }
+    from { scale: 0.94; }
     to   { scale: 1; }
+}
+@keyframes t-menu-reveal {
+    from { clip-path: var(--tng-menu-from, inset(0 round var(--radius-4, 16px))); }
+    to   { clip-path: inset(0 round var(--radius-4, 16px)); }
 }
 @keyframes t-fade-in {
     from { opacity: 0; }
