@@ -6181,21 +6181,117 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     }
 }
 .app-body .notification-bar {
-    background-color: color-mix(in srgb, var(--color-content-bg), transparent 25%);
-    color: var(--color-content-fg);
-    border: 1px solid var(--color-lines-translucent);
+    position: relative;
+    overflow: hidden;
     align-items: center;
-    box-shadow: var(--dropdown-shadow);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    gap: 12px;
+    padding: 10px 10px 10px 12px;
+    border-radius: 18px;
+    background-color: color-mix(in srgb, var(--color-content-bg), transparent 15%);
+    color: var(--color-content-fg-bold);
+    border: 1px solid var(--color-lines-translucent);
+    box-shadow:
+        0 1px 2px color-mix(in srgb, #000000, transparent 92%),
+        0 12px 32px -8px color-mix(in srgb, #000000, transparent 78%);
+    -webkit-backdrop-filter: blur(16px) saturate(1.6);
+    backdrop-filter: blur(16px) saturate(1.6);
+    font-weight: 500;
+    min-height: 52px;
+    box-sizing: border-box;
+}
+.app-body .notification-bar__title {
+    color: var(--color-reject);
 }
 .app-body .notification-bar__action {
     color: var(--color-accent);
-    transition: all .2s;
+    background-color: var(--color-accent-bg);
+    text-transform: none;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 999px;
+    transition: background-color .2s, scale .45s var(--tng-spring);
 }
 .app-body .notification-bar__action:is(:active, :focus, :hover) {
-    background-color: var(--color-accent-bg);
+    background-color: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 75%);
     color: var(--color-accent);
+}
+.app-body .notification-bar__action:active {
+    scale: 0.92;
+    transition: background-color .2s, scale 90ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.app-body .notification-list .notification-bar:not(:has(.notification-bar__loading-indicator))::before {
+    content: '';
+    flex: 0 0 auto;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.5 12.5l4 4L18.5 7.5'/%3E%3C/svg%3E") center / 16px no-repeat,
+        var(--color-accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent), transparent 82%);
+}
+.app-body .notification-list .notification-bar:has(.notification-bar__title)::before {
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M12 6.5v7'/%3E%3Cpath d='M12 17.5h.01'/%3E%3C/svg%3E") center / 16px no-repeat,
+        var(--color-reject);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-reject), transparent 82%);
+}
+.app-body .notification-list .notification-bar:not(:has(.notification-bar__loading-indicator))::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: color-mix(in srgb, var(--color-accent), transparent 45%);
+    transform-origin: left center;
+    scale: 1 1;
+}
+[dir="rtl"] .app-body .notification-list .notification-bar::after {
+    transform-origin: right center;
+}
+.app-body .notification-list .notification-bar.notification-bar--active::after {
+    animation: t-toast-countdown 5s linear forwards;
+}
+.app-body .notification-list .notification-bar:has(.notification-bar__title)::after {
+    background-color: color-mix(in srgb, var(--color-reject), transparent 45%);
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body .notification-bar {
+        translate: 0 28px;
+        scale: 0.9;
+        opacity: 0;
+        filter: blur(4px);
+        transition:
+            translate 280ms cubic-bezier(0.4, 0, 1, 1),
+            scale 280ms cubic-bezier(0.4, 0, 1, 1),
+            opacity 220ms ease-in,
+            filter 280ms ease-in;
+    }
+    :root:not(.reduce-motion) .app-body .notification-bar.notification-bar--active {
+        translate: none;
+        scale: 1;
+        opacity: 1;
+        filter: none;
+        transition:
+            translate 500ms var(--tng-spring),
+            scale 500ms var(--tng-spring),
+            opacity 180ms ease-out,
+            filter 240ms ease-out;
+    }
+    :root:not(.reduce-motion) .app-body .notification-list .notification-bar::before {
+        scale: 0;
+        rotate: -45deg;
+        transition: scale 150ms ease-in, rotate 150ms ease-in;
+    }
+    :root:not(.reduce-motion) .app-body .notification-list .notification-bar.notification-bar--active::before {
+        scale: 1;
+        rotate: 0deg;
+        transition: scale 500ms var(--tng-spring) 120ms, rotate 500ms var(--tng-spring) 120ms;
+    }
+}
+@keyframes t-toast-countdown {
+    from { scale: 1 1; }
+    to   { scale: 0 1; }
 }
 
 .app-body .column-settings h3,
