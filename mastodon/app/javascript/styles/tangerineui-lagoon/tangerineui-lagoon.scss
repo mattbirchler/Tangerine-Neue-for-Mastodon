@@ -6236,25 +6236,6 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
         var(--color-reject);
     box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-reject), transparent 82%);
 }
-.app-body .notification-list .notification-bar:not(:has(.notification-bar__loading-indicator))::after {
-    content: '';
-    position: absolute;
-    inset-inline: 0;
-    bottom: 0;
-    height: 2px;
-    background-color: color-mix(in srgb, var(--color-accent), transparent 45%);
-    transform-origin: left center;
-    scale: 1 1;
-}
-[dir="rtl"] .app-body .notification-list .notification-bar::after {
-    transform-origin: right center;
-}
-.app-body .notification-list .notification-bar.notification-bar--active::after {
-    animation: t-toast-countdown 5s linear forwards;
-}
-.app-body .notification-list .notification-bar:has(.notification-bar__title)::after {
-    background-color: color-mix(in srgb, var(--color-reject), transparent 45%);
-}
 @media (prefers-reduced-motion: no-preference) {
     :root:not(.reduce-motion) .app-body .notification-bar {
         translate: 0 28px;
@@ -6288,10 +6269,6 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
         rotate: 0deg;
         transition: scale 500ms var(--tng-spring) 120ms, rotate 500ms var(--tng-spring) 120ms;
     }
-}
-@keyframes t-toast-countdown {
-    from { scale: 1 1; }
-    to   { scale: 0 1; }
 }
 
 .app-body .column-settings h3,
