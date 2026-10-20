@@ -9,13 +9,18 @@
 
 /* 📄 Meta */
 :root {
-    --version: "v3.0.0-beta.1";
+    --version: "v3.0.0-beta.2";
 
     --variant-name: "Lagoon";
     --variant-emoji: "\1F420\00A0";
     --variant: var(--variant-emoji) var(--variant-name);
 
     --meta: 'Tangerine UI for Mastodon: ' var(--version) ' \00B7 ' var(--variant);
+}
+
+/* 🌀 Motion */
+:root {
+    --tng-spring: linear(0, 0.039, 0.139, 0.276, 0.429, 0.583, 0.726, 0.85, 0.951, 1.029, 1.083, 1.116, 1.131, 1.133, 1.124, 1.108, 1.089, 1.068, 1.048, 1.03, 1.014, 1.002, 0.993, 0.987, 0.983, 0.982, 0.983, 0.984, 0.986, 0.989, 0.992, 0.995, 0.997, 0.999, 1, 1.001, 1.002, 1.002, 1.002, 1.002, 1);
 }
 
 /* 🎨 Colors */
@@ -152,12 +157,14 @@
     --color-border-media: rgba(255, 255, 255, 0.15);
 }
 
-:root:root[data-density] {
+:root:root:is([data-theme-color], :has([class*="_comp_columns_area_"])) {
     --base-color-bg: var(--color-content-bg);
     --base-color-bg-desktop: var(--color-bg);
     --base-color-fg: var(--color-content-fg);
     --base-color-fg-on-accent: var(--color-accent-fg);
     --base-color-accent: var(--color-accent);
+    --base-color-bg-accent: var(--color-accent);
+    --base-color-fg-accent: var(--color-accent);
     --base-color-danger: var(--color-reject);
     --base-highlight-strength: 10%;
     --color-bg-desktop: var(--color-bg);
@@ -1254,10 +1261,10 @@ body.app-body  {
     background-image: var(--icon-star);
     margin: 0;
 }
-html[data-density] .app-body .icon-star {
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .icon-star {
     background-image: var(--icon-heart-accent);
 }
-html[data-density] .app-body .notification-group--favourite .icon-star {
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .notification-group--favourite .icon-star {
     background-image: var(--icon-heart-fill-accent);
 }
 .app-body .media-modal__overlay .icon-star {
@@ -3352,6 +3359,114 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 .app-body .detailed-status__action-bar .icon-button.bookmark-icon.active>.icon-bookmark {
     animation: bounce-vertical .4s ease-out !important;
 }
+@property --tng-pop {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+}
+.app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"] {
+    --tng-pop: 0;
+    --tng-ring: min(1, var(--tng-pop) * 2.2);
+    --tng-burst: clamp(0, (var(--tng-pop) - .08) * 1.5, 1);
+    --tng-visible: min(1, var(--tng-pop) * 60);
+    --tng-burst-color: var(--color-accent);
+    --tng-burst-color-alt: color-mix(in srgb, var(--color-accent), var(--color-content-bg) 45%);
+    position: relative;
+    isolation: isolate;
+}
+@media (prefers-reduced-motion: no-preference) {
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::before,
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        inset-inline-start: calc(var(--inline-padding, 8px) + 10px);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: -1;
+        translate: -50% -50%;
+    }
+    [dir="rtl"] .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::before,
+    [dir="rtl"] .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::after {
+        translate: 50% -50%;
+    }
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"][class*="_comp_button_redesign__iconOnly"]::before,
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"][class*="_comp_button_redesign__iconOnly"]::after {
+        inset-inline-start: 50%;
+    }
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::before {
+        width: 40px;
+        height: 40px;
+        box-shadow: inset 0 0 0 calc(1px + 6px * (1 - var(--tng-ring))) color-mix(in srgb, var(--tng-burst-color), transparent 40%);
+        scale: calc(.35 + var(--tng-ring) * .8);
+        opacity: calc(var(--tng-visible) * (1 - var(--tng-ring) * var(--tng-ring)));
+    }
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::after {
+        --r: calc(9px + 17px * sin(var(--tng-burst) * 90deg));
+        --ri: calc(var(--r) * .72);
+        --s: calc(2.2px * (1 - var(--tng-burst)));
+        --si: calc(1.6px * (1 - var(--tng-burst)));
+        --c1: var(--tng-burst-color);
+        --c2: var(--tng-burst-color-alt);
+        width: 2px;
+        height: 2px;
+        opacity: calc(var(--tng-visible) * (1 - var(--tng-burst) * var(--tng-burst) * var(--tng-burst)));
+        box-shadow:
+            0 calc(var(--r) * -1) 0 var(--s) var(--c1),
+            calc(var(--r) * .7071) calc(var(--r) * -.7071) 0 var(--s) var(--c2),
+            var(--r) 0 0 var(--s) var(--c1),
+            calc(var(--r) * .7071) calc(var(--r) * .7071) 0 var(--s) var(--c2),
+            0 var(--r) 0 var(--s) var(--c1),
+            calc(var(--r) * -.7071) calc(var(--r) * .7071) 0 var(--s) var(--c2),
+            calc(var(--r) * -1) 0 0 var(--s) var(--c1),
+            calc(var(--r) * -.7071) calc(var(--r) * -.7071) 0 var(--s) var(--c2),
+            calc(var(--ri) * .3827) calc(var(--ri) * -.9239) 0 var(--si) var(--c2),
+            calc(var(--ri) * .9239) calc(var(--ri) * -.3827) 0 var(--si) var(--c1),
+            calc(var(--ri) * .9239) calc(var(--ri) * .3827) 0 var(--si) var(--c2),
+            calc(var(--ri) * .3827) calc(var(--ri) * .9239) 0 var(--si) var(--c1),
+            calc(var(--ri) * -.3827) calc(var(--ri) * .9239) 0 var(--si) var(--c2),
+            calc(var(--ri) * -.9239) calc(var(--ri) * .3827) 0 var(--si) var(--c1),
+            calc(var(--ri) * -.9239) calc(var(--ri) * -.3827) 0 var(--si) var(--c2),
+            calc(var(--ri) * -.3827) calc(var(--ri) * -.9239) 0 var(--si) var(--c1);
+    }
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"] > svg {
+        transform-origin: center;
+    }
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"][aria-pressed="true"] {
+        --tng-pop: 1;
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"][aria-pressed="true"] {
+        transition: background-color .2s, color .2s, opacity .2s, scale 450ms var(--tng-spring), --tng-pop .85s linear;
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_status__actionsButtonGap"][aria-pressed="true"] > svg {
+        scale: calc(1 + .55 * sin(var(--tng-pop) * 540deg) * (1 - var(--tng-pop)) * (1 - var(--tng-pop)));
+        rotate: calc(-16deg * sin(var(--tng-pop) * 720deg) * (1 - var(--tng-pop)));
+    }
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]:not([class*="_comp_status__actionsButtonGap"], [class*="_comp_button_redesign__iconOnly"]) {
+        --tng-burst-color-alt: color-mix(in srgb, var(--color-accent), var(--color-content-fg-bold) 25%);
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]:not([class*="_comp_status__actionsButtonGap"], [class*="_comp_button_redesign__iconOnly"])[aria-pressed="true"] {
+        transition: background-color .2s, color .2s, opacity .2s, scale 450ms var(--tng-spring), --tng-pop .9s cubic-bezier(.2, 1.25, .4, 1);
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]:not([class*="_comp_status__actionsButtonGap"], [class*="_comp_button_redesign__iconOnly"])[aria-pressed="true"] > svg {
+        rotate: calc(var(--tng-pop) * 360deg);
+        scale: calc(1 + .35 * sin(min(var(--tng-pop), 1) * 180deg));
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__iconOnly"][aria-pressed="true"] {
+        transition: background-color .2s, color .2s, opacity .2s, scale 450ms var(--tng-spring), --tng-pop .6s linear;
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__iconOnly"][aria-pressed="true"] > svg {
+        translate: 0 calc(-7px * sin(min(var(--tng-pop) * 1.6, 1) * 180deg));
+        scale: calc(1 + .22 * sin(clamp(0, var(--tng-pop) * 1.6 - .6, 1) * 180deg) * -1) calc(1 + .22 * sin(clamp(0, var(--tng-pop) * 1.6 - .6, 1) * 180deg));
+    }
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__iconOnly"]::after {
+        display: none;
+    }
+}
+:root.reduce-motion .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::before,
+:root.reduce-motion .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::after {
+    display: none;
+}
 .app-body .status__action-bar .icon-button,
 .app-body .detailed-status__action-bar .icon-button {
     min-width: 32px;
@@ -3997,7 +4112,7 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 .app-body .notification-ungrouped--direct .notification-ungrouped__header {
     --color-post-bg: color-mix(in srgb, var(--color-accent), var(--color-content-bg) 96%);
 }
-html[data-density] .app-body [class*="_comp_status__isMessage"] {
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [class*="_comp_status__isMessage"] {
     background-color: color-mix(in srgb, var(--color-accent), var(--color-content-bg) 96%);
 }
 .app-body .status__wrapper.status__wrapper-direct:has(.status__content:hover),
@@ -6066,21 +6181,94 @@ html[data-density] .app-body [class*="_comp_status__isMessage"] {
     }
 }
 .app-body .notification-bar {
-    background-color: color-mix(in srgb, var(--color-content-bg), transparent 25%);
-    color: var(--color-content-fg);
-    border: 1px solid var(--color-lines-translucent);
+    position: relative;
+    overflow: hidden;
     align-items: center;
-    box-shadow: var(--dropdown-shadow);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    gap: 12px;
+    padding: 10px 10px 10px 12px;
+    border-radius: 18px;
+    background-color: color-mix(in srgb, var(--color-content-bg), transparent 15%);
+    color: var(--color-content-fg-bold);
+    border: 1px solid var(--color-lines-translucent);
+    box-shadow:
+        0 1px 2px color-mix(in srgb, #000000, transparent 92%),
+        0 12px 32px -8px color-mix(in srgb, #000000, transparent 78%);
+    -webkit-backdrop-filter: blur(16px) saturate(1.6);
+    backdrop-filter: blur(16px) saturate(1.6);
+    font-weight: 500;
+    min-height: 52px;
+    box-sizing: border-box;
+}
+.app-body .notification-bar__title {
+    color: var(--color-reject);
 }
 .app-body .notification-bar__action {
     color: var(--color-accent);
-    transition: all .2s;
+    background-color: var(--color-accent-bg);
+    text-transform: none;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 999px;
+    transition: background-color .2s, scale .45s var(--tng-spring);
 }
 .app-body .notification-bar__action:is(:active, :focus, :hover) {
-    background-color: var(--color-accent-bg);
+    background-color: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 75%);
     color: var(--color-accent);
+}
+.app-body .notification-bar__action:active {
+    scale: 0.92;
+    transition: background-color .2s, scale 90ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.app-body .notification-list .notification-bar:not(:has(.notification-bar__loading-indicator))::before {
+    content: '';
+    flex: 0 0 auto;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.5 12.5l4 4L18.5 7.5'/%3E%3C/svg%3E") center / 16px no-repeat,
+        var(--color-accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent), transparent 82%);
+}
+.app-body .notification-list .notification-bar:has(.notification-bar__title)::before {
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M12 6.5v7'/%3E%3Cpath d='M12 17.5h.01'/%3E%3C/svg%3E") center / 16px no-repeat,
+        var(--color-reject);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-reject), transparent 82%);
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body .notification-bar {
+        translate: 0 28px;
+        scale: 0.9;
+        opacity: 0;
+        filter: blur(4px);
+        transition:
+            translate 280ms cubic-bezier(0.4, 0, 1, 1),
+            scale 280ms cubic-bezier(0.4, 0, 1, 1),
+            opacity 220ms ease-in,
+            filter 280ms ease-in;
+    }
+    :root:not(.reduce-motion) .app-body .notification-bar.notification-bar--active {
+        translate: none;
+        scale: 1;
+        opacity: 1;
+        filter: none;
+        transition:
+            translate 500ms var(--tng-spring),
+            scale 500ms var(--tng-spring),
+            opacity 180ms ease-out,
+            filter 240ms ease-out;
+    }
+    :root:not(.reduce-motion) .app-body .notification-list .notification-bar::before {
+        scale: 0;
+        rotate: -45deg;
+        transition: scale 150ms ease-in, rotate 150ms ease-in;
+    }
+    :root:not(.reduce-motion) .app-body .notification-list .notification-bar.notification-bar--active::before {
+        scale: 1;
+        rotate: 0deg;
+        transition: scale 500ms var(--tng-spring) 120ms, rotate 500ms var(--tng-spring) 120ms;
+    }
 }
 
 .app-body .column-settings h3,
@@ -7116,6 +7304,223 @@ html[data-density] .app-body [class*="_comp_status__isMessage"] {
 }
 @media (prefers-reduced-motion: reduce) {
     .app-body .modal-root__modal:not(.media-modal) { animation: none; }
+}
+.app-body .modal-root__container > [class*="_comp_modal_shell_redesign__modal"] {
+    transform-origin: center;
+    animation: t-modal-open 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_compose_redesign_trigger__composerMinimized"]) {
+    transform-origin: bottom center;
+    animation:
+        t-spring-rise 400ms var(--tng-spring),
+        t-fade-unblur 150ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal {
+    width: 400px;
+    max-width: calc(100vw - 32px);
+    padding: 16px;
+    border-radius: 24px;
+    border: 1px solid var(--color-lines);
+    outline: 0;
+    box-shadow: 0 24px 48px -12px var(--color-shadow-primary);
+    background-color: var(--color-content-bg);
+    animation: t-modal-open 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal:not(:has(.safety-action-modal__confirmation)) {
+    width: 480px;
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(.safety-action-modal__top, .safety-action-modal__bottom) {
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__bottom {
+    margin-top: 16px;
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__confirmation {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--color-content-fg);
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__confirmation h1 {
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--color-fg);
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__confirmation p {
+    margin: 0;
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__actions {
+    justify-content: space-between;
+    gap: 16px;
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__actions :is(.link-button, .button) {
+    min-height: 40px;
+    padding: 8px 16px;
+    border: 0;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    text-decoration: none;
+    transition: background-color 200ms, scale 450ms var(--tng-spring);
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__actions .link-button {
+    color: var(--color-content-fg);
+    background-color: color-mix(in srgb, var(--color-content-fg), transparent 95%);
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__actions .link-button:hover {
+    background-color: color-mix(in srgb, var(--color-content-fg), transparent 90%);
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__actions .button {
+    margin-inline-start: auto;
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__actions :is(.link-button, .button):active {
+    scale: 0.92;
+    transition: background-color 200ms, scale 90ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+    html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal { animation: none; }
+}
+@keyframes t-modal-open {
+    from { opacity: 0; scale: 0.96; }
+    to   { opacity: 1; scale: 1; }
+}
+@property --tng-nav {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body [class*="_comp_button_redesign__base"] {
+        transition: background-color 200ms, color 200ms, opacity 200ms, scale 450ms var(--tng-spring);
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_button_redesign__base"]:active:not(:disabled, [aria-disabled="true"]) {
+        scale: 0.92;
+        transition: background-color 200ms, color 200ms, opacity 200ms, scale 90ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+    }
+    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__link"].active {
+        --tng-nav: 1;
+        transition: background-color 200ms, color 200ms, --tng-nav 550ms linear;
+    }
+    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__link"].active [class*="_navigation_panel_redesign_navigation_link__icon"] > svg {
+        scale: calc(1 + .45 * sin(var(--tng-nav) * 540deg) * (1 - var(--tng-nav)) * (1 - var(--tng-nav)));
+        rotate: calc(-12deg * sin(var(--tng-nav) * 360deg) * (1 - var(--tng-nav)));
+    }
+    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__link"]:active {
+        scale: 0.97;
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_menu__card"] {
+        animation:
+            t-menu-reveal 180ms cubic-bezier(0.22, 1, 0.36, 1),
+            t-fade-in 110ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_menu__card"] > * {
+        transform-origin: var(--tng-menu-origin, top center);
+        animation: t-menu-spring 280ms var(--tng-spring);
+    }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="bottom"] { --tng-menu-origin: top center; --tng-menu-from: inset(0 10% 30% 10% round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="top"] { --tng-menu-origin: bottom center; --tng-menu-from: inset(30% 10% 0 10% round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="left"] { --tng-menu-origin: right center; --tng-menu-from: inset(10% 0 10% 30% round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="right"] { --tng-menu-origin: left center; --tng-menu-from: inset(10% 30% 10% 0 round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-start"] { --tng-menu-origin: top left; --tng-menu-from: inset(0 30% 30% 0 round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-end"] { --tng-menu-origin: top right; --tng-menu-from: inset(0 0 30% 30% round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="top-start"] { --tng-menu-origin: bottom left; --tng-menu-from: inset(30% 30% 0 0 round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="top-end"] { --tng-menu-origin: bottom right; --tng-menu-from: inset(30% 0 0 30% round var(--radius-4, 16px)); }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-start"] { --tng-menu-origin: top right; --tng-menu-from: inset(0 0 30% 30% round var(--radius-4, 16px)); }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-end"] { --tng-menu-origin: top left; --tng-menu-from: inset(0 30% 30% 0 round var(--radius-4, 16px)); }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-start"] { --tng-menu-origin: bottom right; --tng-menu-from: inset(30% 0 0 30% round var(--radius-4, 16px)); }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-end"] { --tng-menu-origin: bottom left; --tng-menu-from: inset(30% 30% 0 0 round var(--radius-4, 16px)); }
+    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__badge"],
+    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__iconWithDot"]::after {
+        animation:
+            t-pop-in 450ms var(--tng-spring),
+            t-fade-in 120ms ease-out;
+    }
+    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__link"]:has([class*="_navigation_panel_redesign_navigation_link__badge"], [class*="_navigation_panel_redesign_navigation_link__iconWithDot"]) [class*="_navigation_panel_redesign_navigation_link__icon"] > svg {
+        transform-origin: 50% 10%;
+        animation: t-bell-wiggle 700ms ease-in-out 150ms;
+    }
+    :root:not(.reduce-motion) .app-body .poll__number {
+        animation: t-rise-in 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    :root:not(.reduce-motion) .app-body .poll li:nth-child(2) .poll__number { animation-delay: 40ms; }
+    :root:not(.reduce-motion) .app-body .poll li:nth-child(3) .poll__number { animation-delay: 80ms; }
+    :root:not(.reduce-motion) .app-body .poll li:nth-child(4) .poll__number { animation-delay: 120ms; }
+    :root:not(.reduce-motion) .app-body .poll__voted__mark {
+        animation: t-pop-in 450ms var(--tng-spring) 150ms both;
+    }
+    :root:not(.reduce-motion) .app-body .poll__option:has(+ .poll__chart.leading) {
+        animation: t-trophy-pop 500ms var(--tng-spring) 350ms both;
+    }
+    .app-body .poll__chart.leading {
+        overflow: hidden;
+    }
+    :root:not(.reduce-motion) .app-body .poll__chart.leading::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(100deg, transparent 20%, rgb(255 255 255 / .55) 50%, transparent 80%);
+        translate: -100% 0;
+        animation: t-shine 900ms cubic-bezier(0.22, 1, 0.36, 1) 500ms;
+    }
+}
+@keyframes t-menu-spring {
+    from { scale: 0.94; }
+    to   { scale: 1; }
+}
+@keyframes t-menu-reveal {
+    from { clip-path: var(--tng-menu-from, inset(0 round var(--radius-4, 16px))); }
+    to   { clip-path: inset(0 round var(--radius-4, 16px)); }
+}
+@keyframes t-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes t-pop-in {
+    from { scale: 0; }
+    to   { scale: 1; }
+}
+@keyframes t-rise-in {
+    from { opacity: 0; translate: 0 6px; filter: blur(2px); }
+    to   { opacity: 1; translate: 0 0; filter: blur(0); }
+}
+@keyframes t-trophy-pop {
+    from { background-size: 0; }
+    to   { background-size: 20px; }
+}
+@keyframes t-shine {
+    from { translate: -100% 0; }
+    to   { translate: 100% 0; }
+}
+@keyframes t-bell-wiggle {
+    0%   { rotate: 0deg; }
+    10%  { rotate: 16deg; }
+    30%  { rotate: -13deg; }
+    30%  { rotate: 9deg; }
+    60%  { rotate: -6deg; }
+    75%  { rotate: 3deg; }
+    100% { rotate: 0deg; }
+}
+@keyframes t-spring-rise {
+    from { translate: 0 48px; scale: 0.92; }
+    to   { translate: 0 0; scale: 1; }
+}
+@keyframes t-fade-unblur {
+    from { opacity: 0; filter: blur(2px); }
+    to   { opacity: 1; filter: blur(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .app-body .modal-root__container > [class*="_comp_modal_shell_redesign__modal"],
+    .app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_compose_redesign_trigger__composerMinimized"]) {
+        animation: none;
+    }
 }
 .app-body .compare-history-modal {
     background-color: var(--color-content-bg);
