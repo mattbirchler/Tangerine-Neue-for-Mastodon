@@ -7418,25 +7418,25 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     }
     :root:not(.reduce-motion) .app-body [class*="_comp_menu__card"] {
         animation:
-            t-menu-reveal 260ms cubic-bezier(0.22, 1, 0.36, 1),
-            t-fade-in 150ms cubic-bezier(0.22, 1, 0.36, 1);
+            t-menu-reveal 180ms cubic-bezier(0.22, 1, 0.36, 1),
+            t-fade-in 110ms cubic-bezier(0.22, 1, 0.36, 1);
     }
     :root:not(.reduce-motion) .app-body [class*="_comp_menu__card"] > * {
         transform-origin: var(--tng-menu-origin, top center);
-        animation: t-menu-spring 350ms var(--tng-spring);
+        animation: t-menu-spring 280ms var(--tng-spring);
     }
-    .app-body [class*="_comp_menu__card"][data-popover-placement^="bottom"] { --tng-menu-origin: top center; --tng-menu-from: inset(0 15% 45% 15% round var(--radius-4, 16px)); }
-    .app-body [class*="_comp_menu__card"][data-popover-placement^="top"] { --tng-menu-origin: bottom center; --tng-menu-from: inset(45% 15% 0 15% round var(--radius-4, 16px)); }
-    .app-body [class*="_comp_menu__card"][data-popover-placement^="left"] { --tng-menu-origin: right center; --tng-menu-from: inset(15% 0 15% 45% round var(--radius-4, 16px)); }
-    .app-body [class*="_comp_menu__card"][data-popover-placement^="right"] { --tng-menu-origin: left center; --tng-menu-from: inset(15% 45% 15% 0 round var(--radius-4, 16px)); }
-    .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-start"] { --tng-menu-origin: top left; --tng-menu-from: inset(0 45% 45% 0 round var(--radius-4, 16px)); }
-    .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-end"] { --tng-menu-origin: top right; --tng-menu-from: inset(0 0 45% 45% round var(--radius-4, 16px)); }
-    .app-body [class*="_comp_menu__card"][data-popover-placement="top-start"] { --tng-menu-origin: bottom left; --tng-menu-from: inset(45% 45% 0 0 round var(--radius-4, 16px)); }
-    .app-body [class*="_comp_menu__card"][data-popover-placement="top-end"] { --tng-menu-origin: bottom right; --tng-menu-from: inset(45% 0 0 45% round var(--radius-4, 16px)); }
-    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-start"] { --tng-menu-origin: top right; --tng-menu-from: inset(0 0 45% 45% round var(--radius-4, 16px)); }
-    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-end"] { --tng-menu-origin: top left; --tng-menu-from: inset(0 45% 45% 0 round var(--radius-4, 16px)); }
-    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-start"] { --tng-menu-origin: bottom right; --tng-menu-from: inset(45% 0 0 45% round var(--radius-4, 16px)); }
-    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-end"] { --tng-menu-origin: bottom left; --tng-menu-from: inset(45% 45% 0 0 round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="bottom"] { --tng-menu-origin: top center; --tng-menu-from: inset(0 10% 30% 10% round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="top"] { --tng-menu-origin: bottom center; --tng-menu-from: inset(30% 10% 0 10% round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="left"] { --tng-menu-origin: right center; --tng-menu-from: inset(10% 0 10% 30% round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement^="right"] { --tng-menu-origin: left center; --tng-menu-from: inset(10% 30% 10% 0 round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-start"] { --tng-menu-origin: top left; --tng-menu-from: inset(0 30% 30% 0 round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-end"] { --tng-menu-origin: top right; --tng-menu-from: inset(0 0 30% 30% round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="top-start"] { --tng-menu-origin: bottom left; --tng-menu-from: inset(30% 30% 0 0 round var(--radius-4, 16px)); }
+    .app-body [class*="_comp_menu__card"][data-popover-placement="top-end"] { --tng-menu-origin: bottom right; --tng-menu-from: inset(30% 0 0 30% round var(--radius-4, 16px)); }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-start"] { --tng-menu-origin: top right; --tng-menu-from: inset(0 0 30% 30% round var(--radius-4, 16px)); }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-end"] { --tng-menu-origin: top left; --tng-menu-from: inset(0 30% 30% 0 round var(--radius-4, 16px)); }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-start"] { --tng-menu-origin: bottom right; --tng-menu-from: inset(30% 0 0 30% round var(--radius-4, 16px)); }
+    [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-end"] { --tng-menu-origin: bottom left; --tng-menu-from: inset(30% 30% 0 0 round var(--radius-4, 16px)); }
     :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__badge"],
     :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__iconWithDot"]::after {
         animation:
@@ -7501,9 +7501,9 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
 }
 @keyframes t-bell-wiggle {
     0%   { rotate: 0deg; }
-    15%  { rotate: 16deg; }
+    10%  { rotate: 16deg; }
     30%  { rotate: -13deg; }
-    45%  { rotate: 9deg; }
+    30%  { rotate: 9deg; }
     60%  { rotate: -6deg; }
     75%  { rotate: 3deg; }
     100% { rotate: 0deg; }
