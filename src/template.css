@@ -7315,6 +7315,79 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
         t-spring-rise 400ms var(--tng-spring),
         t-fade-unblur 150ms cubic-bezier(0.22, 1, 0.36, 1);
 }
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal {
+    width: 400px;
+    max-width: calc(100vw - 32px);
+    padding: 16px;
+    border-radius: 24px;
+    border: 1px solid var(--color-lines);
+    outline: 0;
+    box-shadow: 0 24px 48px -12px var(--color-shadow-primary);
+    background-color: var(--color-content-bg);
+    animation: t-modal-open 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal:not(:has(.safety-action-modal__confirmation)) {
+    width: 480px;
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(.safety-action-modal__top, .safety-action-modal__bottom) {
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__bottom {
+    margin-top: 16px;
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__confirmation {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--color-content-fg);
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__confirmation h1 {
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--color-fg);
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__confirmation p {
+    margin: 0;
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__actions {
+    justify-content: space-between;
+    gap: 16px;
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__actions :is(.link-button, .button) {
+    min-height: 40px;
+    padding: 8px 16px;
+    border: 0;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    text-decoration: none;
+    transition: background-color 200ms, scale 450ms var(--tng-spring);
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__actions .link-button {
+    color: var(--color-content-fg);
+    background-color: color-mix(in srgb, var(--color-content-fg), transparent 95%);
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__actions .link-button:hover {
+    background-color: color-mix(in srgb, var(--color-content-fg), transparent 90%);
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__actions .button {
+    margin-inline-start: auto;
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal__actions :is(.link-button, .button):active {
+    scale: 0.92;
+    transition: background-color 200ms, scale 90ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+    html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .safety-action-modal { animation: none; }
+}
 @keyframes t-modal-open {
     from { opacity: 0; scale: 0.96; }
     to   { opacity: 1; scale: 1; }
