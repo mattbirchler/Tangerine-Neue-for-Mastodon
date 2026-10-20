@@ -989,6 +989,12 @@ body.app-body  {
     border-radius: 0;
     padding-bottom: 20px;
 }
+@media screen and (min-width: 771px) {
+    .app-body [class*="_comp_column_header__layout"] {
+        border: 1px solid var(--color-lines);
+        border-bottom: 0;
+    }
+}
 .app-body .dismissable-banner + .scrollable {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
