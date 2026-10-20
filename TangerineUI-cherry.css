@@ -3354,6 +3354,114 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 .app-body .detailed-status__action-bar .icon-button.bookmark-icon.active>.icon-bookmark {
     animation: bounce-vertical .4s ease-out !important;
 }
+@property --tng-pop {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+}
+.app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"] {
+    --tng-pop: 0;
+    --tng-ring: min(1, var(--tng-pop) * 2.2);
+    --tng-burst: clamp(0, (var(--tng-pop) - .08) * 1.5, 1);
+    --tng-visible: min(1, var(--tng-pop) * 60);
+    --tng-burst-color: var(--color-accent);
+    --tng-burst-color-alt: color-mix(in srgb, var(--color-accent), var(--color-content-bg) 45%);
+    position: relative;
+    isolation: isolate;
+}
+@media (prefers-reduced-motion: no-preference) {
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::before,
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        inset-inline-start: calc(var(--inline-padding, 8px) + 10px);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: -1;
+        translate: -50% -50%;
+    }
+    [dir="rtl"] .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::before,
+    [dir="rtl"] .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::after {
+        translate: 50% -50%;
+    }
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"][class*="_comp_button_redesign__iconOnly"]::before,
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"][class*="_comp_button_redesign__iconOnly"]::after {
+        inset-inline-start: 50%;
+    }
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::before {
+        width: 40px;
+        height: 40px;
+        box-shadow: inset 0 0 0 calc(1px + 6px * (1 - var(--tng-ring))) color-mix(in srgb, var(--tng-burst-color), transparent 40%);
+        scale: calc(.35 + var(--tng-ring) * .8);
+        opacity: calc(var(--tng-visible) * (1 - var(--tng-ring) * var(--tng-ring)));
+    }
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::after {
+        --r: calc(9px + 17px * sin(var(--tng-burst) * 90deg));
+        --ri: calc(var(--r) * .72);
+        --s: calc(2.2px * (1 - var(--tng-burst)));
+        --si: calc(1.6px * (1 - var(--tng-burst)));
+        --c1: var(--tng-burst-color);
+        --c2: var(--tng-burst-color-alt);
+        width: 2px;
+        height: 2px;
+        opacity: calc(var(--tng-visible) * (1 - var(--tng-burst) * var(--tng-burst) * var(--tng-burst)));
+        box-shadow:
+            0 calc(var(--r) * -1) 0 var(--s) var(--c1),
+            calc(var(--r) * .7071) calc(var(--r) * -.7071) 0 var(--s) var(--c2),
+            var(--r) 0 0 var(--s) var(--c1),
+            calc(var(--r) * .7071) calc(var(--r) * .7071) 0 var(--s) var(--c2),
+            0 var(--r) 0 var(--s) var(--c1),
+            calc(var(--r) * -.7071) calc(var(--r) * .7071) 0 var(--s) var(--c2),
+            calc(var(--r) * -1) 0 0 var(--s) var(--c1),
+            calc(var(--r) * -.7071) calc(var(--r) * -.7071) 0 var(--s) var(--c2),
+            calc(var(--ri) * .3827) calc(var(--ri) * -.9239) 0 var(--si) var(--c2),
+            calc(var(--ri) * .9239) calc(var(--ri) * -.3827) 0 var(--si) var(--c1),
+            calc(var(--ri) * .9239) calc(var(--ri) * .3827) 0 var(--si) var(--c2),
+            calc(var(--ri) * .3827) calc(var(--ri) * .9239) 0 var(--si) var(--c1),
+            calc(var(--ri) * -.3827) calc(var(--ri) * .9239) 0 var(--si) var(--c2),
+            calc(var(--ri) * -.9239) calc(var(--ri) * .3827) 0 var(--si) var(--c1),
+            calc(var(--ri) * -.9239) calc(var(--ri) * -.3827) 0 var(--si) var(--c2),
+            calc(var(--ri) * -.3827) calc(var(--ri) * -.9239) 0 var(--si) var(--c1);
+    }
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"] > svg {
+        transform-origin: center;
+    }
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"][aria-pressed="true"] {
+        --tng-pop: 1;
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"][aria-pressed="true"] {
+        transition: background-color .2s, color .2s, opacity .2s, --tng-pop .85s linear;
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_status__actionsButtonGap"][aria-pressed="true"] > svg {
+        scale: calc(1 + .55 * sin(var(--tng-pop) * 540deg) * (1 - var(--tng-pop)) * (1 - var(--tng-pop)));
+        rotate: calc(-16deg * sin(var(--tng-pop) * 720deg) * (1 - var(--tng-pop)));
+    }
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]:not([class*="_comp_status__actionsButtonGap"], [class*="_comp_button_redesign__iconOnly"]) {
+        --tng-burst-color-alt: color-mix(in srgb, var(--color-accent), var(--color-content-fg-bold) 25%);
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]:not([class*="_comp_status__actionsButtonGap"], [class*="_comp_button_redesign__iconOnly"])[aria-pressed="true"] {
+        transition: background-color .2s, color .2s, opacity .2s, --tng-pop .9s cubic-bezier(.2, 1.25, .4, 1);
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]:not([class*="_comp_status__actionsButtonGap"], [class*="_comp_button_redesign__iconOnly"])[aria-pressed="true"] > svg {
+        rotate: calc(var(--tng-pop) * 360deg);
+        scale: calc(1 + .35 * sin(min(var(--tng-pop), 1) * 180deg));
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__iconOnly"][aria-pressed="true"] {
+        transition: background-color .2s, color .2s, opacity .2s, --tng-pop .6s linear;
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__iconOnly"][aria-pressed="true"] > svg {
+        translate: 0 calc(-7px * sin(min(var(--tng-pop) * 1.6, 1) * 180deg));
+        scale: calc(1 + .22 * sin(clamp(0, var(--tng-pop) * 1.6 - .6, 1) * 180deg) * -1) calc(1 + .22 * sin(clamp(0, var(--tng-pop) * 1.6 - .6, 1) * 180deg));
+    }
+    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__iconOnly"]::after {
+        display: none;
+    }
+}
+:root.reduce-motion .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::before,
+:root.reduce-motion .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::after {
+    display: none;
+}
 .app-body .status__action-bar .icon-button,
 .app-body .detailed-status__action-bar .icon-button {
     min-width: 32px;
