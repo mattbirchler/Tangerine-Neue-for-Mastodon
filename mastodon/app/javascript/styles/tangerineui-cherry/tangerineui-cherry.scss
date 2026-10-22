@@ -2478,7 +2478,11 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .not
     border-radius: 8px;
     overflow: hidden;
 }
-.app-body :is(.status, .detailed-status) .poll__option {
+/* Scoped to the post's poll, not the composer's or the report dialog's. 5.0
+   rebuilt the post as a CSS module, so .status no longer wraps it; .poll does
+   in both versions. Without this the option loses its stacking and the bar
+   below paints over the label. */
+.app-body :is(.status, .detailed-status, .poll) .poll__option {
     border: 1px solid var(--color-lines-translucent);
     color: var(--color-content-fg);
     font-weight: 500;
