@@ -7592,6 +7592,9 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(
     background-color: var(--color-accent);
     color: var(--color-accent-fg);
 }
+.app-body [class*="_comp_mini_card__card"] {
+    border-radius: 12px;
+}
 .app-body [class*="_comp_button_redesign__base"] .loading-indicator {
     position: static;
     transform: none;
