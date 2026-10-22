@@ -7566,6 +7566,18 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     background-color: var(--bg);
     color: var(--fg);
 }
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(.load-more, .load-gap) {
+    width: fit-content;
+    margin: 16px auto;
+    padding: 8px 20px;
+    border-radius: 999px;
+    background-color: var(--color-accent-bg);
+    color: var(--color-accent);
+    font-weight: 600;
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(.load-more, .load-gap):is(:hover, :active) {
+    background-color: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
+}
 .app-body [class*="_comp_button_redesign__base"] .loading-indicator {
     position: static;
     transform: none;
