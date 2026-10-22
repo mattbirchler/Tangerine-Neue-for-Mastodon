@@ -92,7 +92,8 @@
 /* Mastodon 4.6 drives the colour scheme via [data-color-scheme] on <html>
    (default = dark), not prefers-color-scheme. Match that mechanism. */
 :root[data-color-scheme="dark"],
-:root:not([data-color-scheme]) {
+:root:not([data-color-scheme]),
+.app-body [data-color-scheme="dark"] {
         --color-bg: #111111;
         --gradient-bg: linear-gradient(90deg, var(--color-bg), var(--color-bg));
         --color-fg: #e3e6ea;
@@ -124,7 +125,8 @@
 }
 
 /* 🎯 Mastodon 4.6 design tokens */
-:root:root {
+:root:root,
+.app-body [data-color-scheme] {
     /* Text */
     --color-text-primary: var(--color-content-fg);
     --color-text-secondary: #5a534d;
@@ -184,7 +186,8 @@
     --color-border-media: rgba(255, 255, 255, 0.15);
 }
 
-:root:root:is([data-theme-color], :has([class*="_comp_columns_area_"])) {
+:root:root:is([data-theme-color], :has([class*="_comp_columns_area_"])),
+.app-body [data-color-scheme] {
     --base-color-bg: var(--color-content-bg);
     --base-color-bg-desktop: var(--color-bg);
     --base-color-fg: var(--color-content-fg);
@@ -211,7 +214,8 @@
 
 /* A11y: dark-mode default-theme contrast fixes */
 :root:root[data-color-scheme="dark"],
-:root:root:not([data-color-scheme]) {
+:root:root:not([data-color-scheme]),
+.app-body [data-color-scheme="dark"] {
         --color-text-secondary: #a0a0a0;
         --color-text-tertiary: #909090;
         --color-text-error: #ff8d99;
@@ -7561,6 +7565,14 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     --fg: var(--color-accent-fg);
     background-color: var(--bg);
     color: var(--fg);
+}
+.app-body [data-color-scheme] [class*="_comp_button_redesign__contrastOnMedia"]:not([class*="_comp_button_redesign__accent"], [class*="_comp_button_redesign__destructive"]) {
+    --bg: rgb(0 0 0 / .5);
+    --bg-hover: rgb(0 0 0 / .65);
+    --fg: #ffffff;
+    border-color: rgb(255 255 255 / .18);
+    -webkit-backdrop-filter: blur(12px) saturate(1.4);
+    backdrop-filter: blur(12px) saturate(1.4);
 }
 @keyframes t-spring-rise {
     from { translate: 0 48px; scale: 0.92; }
