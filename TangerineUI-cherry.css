@@ -65,7 +65,8 @@
 /* Mastodon 4.6 drives the colour scheme via [data-color-scheme] on <html>
    (default = dark), not prefers-color-scheme. Match that mechanism. */
 :root[data-color-scheme="dark"],
-:root:not([data-color-scheme]) {
+:root:not([data-color-scheme]),
+.app-body [data-color-scheme="dark"] {
         --color-bg: #111111;
         --gradient-bg: linear-gradient(90deg, var(--color-bg), var(--color-bg));
         --color-fg: #d6d2e0;
@@ -97,7 +98,8 @@
 }
 
 /* 🎯 Mastodon 4.6 design tokens */
-:root:root {
+:root:root,
+.app-body [data-color-scheme] {
     /* Text */
     --color-text-primary: var(--color-content-fg);
     --color-text-secondary: #5a534d;
@@ -157,7 +159,8 @@
     --color-border-media: rgba(255, 255, 255, 0.15);
 }
 
-:root:root:is([data-theme-color], :has([class*="_comp_columns_area_"])) {
+:root:root:is([data-theme-color], :has([class*="_comp_columns_area_"])),
+.app-body [data-color-scheme] {
     --base-color-bg: var(--color-content-bg);
     --base-color-bg-desktop: var(--color-bg);
     --base-color-fg: var(--color-content-fg);
@@ -184,7 +187,8 @@
 
 /* A11y: dark-mode default-theme contrast fixes */
 :root:root[data-color-scheme="dark"],
-:root:root:not([data-color-scheme]) {
+:root:root:not([data-color-scheme]),
+.app-body [data-color-scheme="dark"] {
         --color-text-secondary: #a0a0a0;
         --color-text-tertiary: #909090;
         --color-text-error: #ff8d99;
@@ -719,7 +723,11 @@
 body.app-body  {
     background-color: var(--color-bg);
     color: var(--color-fg);
-    font-family: ui-rounded, "mastodon-font-sans-serif", sans-serif;
+    font-family: Fredoka, ui-rounded, "SF Pro Rounded", "mastodon-font-sans-serif", sans-serif;
+}
+:root:root:not(.system-font) {
+    --font-body: Fredoka, ui-rounded, "SF Pro Rounded", "mastodon-font-sans-serif", Inter, sans-serif;
+    --font-heading: Fredoka, ui-rounded, "SF Pro Rounded", "mastodon-font-sans-serif", Inter, sans-serif;
 }
 
 ::selection {
@@ -988,6 +996,15 @@ body.app-body  {
     border-bottom: 0;
     border-radius: 0;
     padding-bottom: 20px;
+}
+@media screen and (min-width: 771px) {
+    .app-body [class*="_comp_column_header__layout"] {
+        border: 1px solid var(--color-lines);
+        border-bottom: 0;
+    }
+    .app-body [class*="_comp_column_header__root"]::after {
+        inset-inline: 1px;
+    }
 }
 .app-body .dismissable-banner + .scrollable {
     border-top-left-radius: 0;
@@ -3800,9 +3817,12 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 .app-body .video-player {
     transition: transform .3s;
 }
+:root {
+    --tng-media-lines: var(--color-lines-translucent);
+}
 .app-body .media-gallery__item {
     border-radius: 8px !important;
-    outline: 1px solid var(--color-lines-translucent);
+    outline: 1px solid var(--tng-media-lines);
     outline-offset: -1px;
 }
 .app-body [class*="_comp_status_attachments__galleryWrapper"] :is(.media-gallery__item, .media-gallery__item-thumbnail, .media-gallery__item-thumbnail img, .media-gallery__preview, .video-player, .audio-player) {
@@ -3814,7 +3834,7 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
     inset: 0;
     z-index: 2;
     border-radius: inherit;
-    box-shadow: inset 0 0 0 1px var(--color-lines-translucent);
+    box-shadow: inset 0 0 0 1px var(--tng-media-lines);
     pointer-events: none;
 }
 
@@ -7519,6 +7539,94 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     60%  { rotate: -6deg; }
     75%  { rotate: 3deg; }
     100% { rotate: 0deg; }
+}
+.app-body :is([class*="_compose_redesign__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
+    --bg: var(--color-accent-bg);
+    --fg: var(--color-accent);
+    --bg-hover: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
+}
+.app-body :is([class*="_compose_redesign__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"]:is([aria-pressed="true"], [aria-expanded="true"]) {
+    --bg: var(--color-accent);
+    --fg: var(--color-accent-fg);
+    background-color: var(--bg);
+    color: var(--fg);
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(.load-more, .load-gap) {
+    width: fit-content;
+    margin: 16px auto;
+    padding: 8px 20px;
+    border-radius: 999px;
+    background-color: var(--color-accent-bg);
+    color: var(--color-accent);
+    font-weight: 600;
+}
+html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(.load-more, .load-gap):is(:hover, :active) {
+    background-color: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
+}
+.app-body [class*="_comp_tags__tag"]:not([class*="_comp_tags__tagsWrapper"]) {
+    border-color: transparent;
+    background-color: var(--color-accent-bg);
+    color: var(--color-accent);
+    font-weight: 500;
+}
+.app-body button[class*="_comp_tags__tag"]:is(:hover, :focus) {
+    border-color: transparent;
+    background-color: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
+}
+.app-body [class*="_comp_tags__tag"][class*="_comp_tags__active"] {
+    background-color: var(--color-accent);
+    color: var(--color-accent-fg);
+}
+.app-body [class*="_comp_mini_card__card"] {
+    border-radius: 12px;
+}
+.app-body [class*="_feat_account_edit__editButton"],
+.app-body .button[class*="_feat_account_edit__editButton"],
+.app-body .button[class*="verifiedLinkHelpButton"],
+.app-body .button[class*="verifiedLinkHelpButton"]:is(:active, :focus) {
+    border-color: transparent;
+    border-radius: 999px;
+    background-color: var(--color-accent-bg);
+    color: var(--color-accent);
+}
+.app-body [class*="_feat_account_edit__editButton"]:is(:hover, :focus-visible),
+.app-body .button[class*="_feat_account_edit__editButton"]:is(:hover, :focus-visible),
+.app-body .button[class*="verifiedLinkHelpButton"]:hover {
+    background-color: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
+    color: var(--color-accent);
+}
+.app-body [class*="_feat_account_edit__deleteButton"]:is(:hover, :focus-visible) {
+    background-color: color-mix(in srgb, var(--color-reject) 16%, transparent);
+    color: var(--color-reject);
+}
+.app-body [class*="_feat_account_edit__imageButton"] {
+    border-color: rgb(255 255 255 / .18);
+    border-radius: 999px;
+    background-color: rgb(0 0 0 / .5);
+    color: #ffffff;
+    -webkit-backdrop-filter: blur(12px) saturate(1.4);
+    backdrop-filter: blur(12px) saturate(1.4);
+}
+.app-body [class*="_feat_account_edit__imageButton"]:hover {
+    background-color: rgb(0 0 0 / .65);
+}
+.app-body [class*="_comp_button_redesign__base"] .loading-indicator {
+    position: static;
+    transform: none;
+    color: inherit;
+}
+.app-body [class*="_comp_button_redesign__base"] .loading-indicator .circular-progress {
+    width: 16px;
+    height: 16px;
+    color: inherit;
+}
+.app-body [data-color-scheme] [class*="_comp_button_redesign__contrastOnMedia"]:not([class*="_comp_button_redesign__accent"], [class*="_comp_button_redesign__destructive"]) {
+    --bg: rgb(0 0 0 / .5);
+    --bg-hover: rgb(0 0 0 / .65);
+    --fg: #ffffff;
+    border-color: rgb(255 255 255 / .18);
+    -webkit-backdrop-filter: blur(12px) saturate(1.4);
+    backdrop-filter: blur(12px) saturate(1.4);
 }
 @keyframes t-spring-rise {
     from { translate: 0 48px; scale: 0.92; }
