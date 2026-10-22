@@ -7627,6 +7627,9 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(
 .app-body [class*="_comp_mini_card__card"] {
     border-radius: 12px;
 }
+.app-body .notification-group__main > [class*="_comp_card__root"]:not([class*="_comp_card__rootUnclickable"]) {
+    cursor: pointer;
+}
 .app-body [class*="_feat_account_edit__editButton"],
 .app-body .button[class*="_feat_account_edit__editButton"],
 .app-body .button[class*="verifiedLinkHelpButton"],
