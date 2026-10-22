@@ -5781,7 +5781,12 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     top: 50%;
     transform: translateY(-50%);
 }
-.app-body .search__input:where(:not(.active), .active) {
+/* 5.0 moved the search field's styling into a CSS module, so .search__input
+   no longer matches there and the field fell back to a transparent pill. The
+   new class is matched on the input only: the icon wrapper's class starts
+   with the same name (…__searchIcon). */
+.app-body .search__input:where(:not(.active), .active),
+.app-body input[class*="_components_search__search"] {
     border-radius: 8px;
     background-color: var(--color-accent-bg);
     color: var(--color-content-fg);
@@ -5798,17 +5803,20 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     border-radius: 8px;
 }
 .app-body .search__input::placeholder,
+.app-body input[class*="_components_search__search"]::placeholder,
 .app-body .compose-form .spoiler-input__input::placeholder {
     font-weight: 500;
     color: var(--color-accent);
 }
-.app-body .search__input:focus {
+.app-body .search__input:focus,
+.app-body input[class*="_components_search__search"]:focus {
     border-color: var(--color-accent);
     background-color: var(--color-content-bg);
     outline: 3px solid var(--color-accent-bg);
     border-radius: 8px;
 }
 .app-body .search__input:focus::placeholder,
+.app-body input[class*="_components_search__search"]:focus::placeholder,
 .app-body .compose-form .spoiler-input__input:focus::placeholder {
     color: var(--color-content-fg);
     opacity: .4;
