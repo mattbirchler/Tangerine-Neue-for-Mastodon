@@ -7528,12 +7528,12 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     75%  { rotate: 3deg; }
     100% { rotate: 0deg; }
 }
-.app-body [class*="_compose_redesign__root"] [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
+.app-body :is([class*="_compose_redesign__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
     --bg: var(--color-accent-bg);
     --fg: var(--color-accent);
     --bg-hover: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
 }
-.app-body [class*="_compose_redesign__root"] [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"]:is([aria-pressed="true"], [aria-expanded="true"]) {
+.app-body :is([class*="_compose_redesign__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"]:is([aria-pressed="true"], [aria-expanded="true"]) {
     --bg: var(--color-accent);
     --fg: var(--color-accent-fg);
     background-color: var(--bg);
@@ -7550,6 +7550,20 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(
 }
 html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(.load-more, .load-gap):is(:hover, :active) {
     background-color: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
+}
+.app-body [class*="_comp_tags__tag"]:not([class*="_comp_tags__tagsWrapper"]) {
+    border-color: transparent;
+    background-color: var(--color-accent-bg);
+    color: var(--color-accent);
+    font-weight: 500;
+}
+.app-body button[class*="_comp_tags__tag"]:is(:hover, :focus) {
+    border-color: transparent;
+    background-color: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
+}
+.app-body [class*="_comp_tags__tag"][class*="_comp_tags__active"] {
+    background-color: var(--color-accent);
+    color: var(--color-accent-fg);
 }
 .app-body [class*="_comp_button_redesign__base"] .loading-indicator {
     position: static;
