@@ -729,6 +729,9 @@ body.app-body  {
     --font-body: Fredoka, ui-rounded, "SF Pro Rounded", "mastodon-font-sans-serif", Inter, sans-serif;
     --font-heading: Fredoka, ui-rounded, "SF Pro Rounded", "mastodon-font-sans-serif", Inter, sans-serif;
 }
+.app-body :is([class*="_comp_button_redesign__base"], [class*="_comp_button_redesign__label"], .button, .display-name strong, .display-name__html, [class*="_comp_status_header__nameLink"], [class*="_navigation_panel_redesign_navigation_link__label"]) {
+    font-weight: 600;
+}
 
 ::selection {
     color: var(--color-accent-fg);
@@ -7174,7 +7177,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
 }
 
 .app-body .visibility-dropdown__label {
-    font-weight: 800;
+    font-weight: 600;
 }
 
 .app-body .visibility-modal__quote-warning {
