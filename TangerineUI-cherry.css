@@ -719,11 +719,11 @@
 body.app-body  {
     background-color: var(--color-bg);
     color: var(--color-fg);
-    font-family: ui-rounded, "SF Pro Rounded", "mastodon-font-sans-serif", sans-serif;
+    font-family: Fredoka, ui-rounded, "SF Pro Rounded", "mastodon-font-sans-serif", sans-serif;
 }
 :root:root:not(.system-font) {
-    --font-body: ui-rounded, "SF Pro Rounded", "mastodon-font-sans-serif", Inter, sans-serif;
-    --font-heading: ui-rounded, "SF Pro Rounded", "mastodon-font-sans-serif", Inter, sans-serif;
+    --font-body: Fredoka, ui-rounded, "SF Pro Rounded", "mastodon-font-sans-serif", Inter, sans-serif;
+    --font-heading: Fredoka, ui-rounded, "SF Pro Rounded", "mastodon-font-sans-serif", Inter, sans-serif;
 }
 
 ::selection {
