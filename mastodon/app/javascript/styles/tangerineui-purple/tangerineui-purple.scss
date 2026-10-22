@@ -8070,6 +8070,22 @@ a:is(.active,
     color: var(--color-fg-muted);
     order: 10;
 }
+/* 4.6 rebuilt the footer as a CSS module (link_footer.module.scss) and 5.0
+   replaced it with another one (footer_links), so .link-footer above has not
+   matched since 4.6 and the signature line went missing. Same treatment on
+   the new hooks. The multi-column layout is left out, as above. */
+.app-body [class*="_link_footer__wrapper"]:not([data-context="multi-column"])::after {
+    content: var(--meta);
+    color: var(--color-fg-muted);
+}
+.app-body [class*="_footer_links__root"] {
+    color: var(--color-fg-muted);
+}
+.app-body [class*="_footer_links__root"]::after {
+    content: var(--meta);
+    display: block;
+    margin-top: 12px;
+}
 
 /* Server banner */
 .app-body .server-banner__introduction {
