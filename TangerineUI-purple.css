@@ -15,7 +15,7 @@
     --variant-emoji: "\1FABB\00A0";
     --variant: var(--variant-emoji) var(--variant-name);
 
-    --meta: 'Tangerine UI for Mastodon: ' var(--version) ' \00B7 ' var(--variant);
+    --meta: 'Tangerine Neue for Mastodon: ' var(--version) ' \00B7 ' var(--variant);
 }
 
 /* 🌀 Motion */
@@ -1850,7 +1850,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .not
 .app-body a.status-link:not(.mention, .hashtag),
 .app-body .status__content a.unhandled-link,
 .app-body a:is(.status-link, .mention, .navigation-bar__profile-edit) span,
-.app-body :is(.account__header__fields, .account__header__content) a span {
+.app-body :is(.account__header__fields, .account__header__content, [class*="_account_bio__bio"]) a span {
     text-decoration-line: underline;
     text-decoration-color: color-mix(in srgb, var(--color-accent), transparent 55%);
     text-decoration-thickness: 2px;
@@ -1859,7 +1859,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .not
 .app-body a.status-link:not(.mention, .hashtag):is(:active, :focus, :hover),
 .app-body .status__content a.unhandled-link:hover,
 .app-body a:is(.status-link, .mention, .navigation-bar__profile-edit):is(:active, :focus, :hover) span,
-.app-body :is(.account__header__fields, .account__header__content, .trends__item__name) a:is(:active, :focus, :hover) span,
+.app-body :is(.account__header__fields, .account__header__content, [class*="_account_bio__bio"], .trends__item__name) a:is(:active, :focus, :hover) span,
 .app-body
     :is(
         .detailed-status__display-name,
@@ -1877,7 +1877,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .not
         text-underline-offset: 2px;
 }
 .app-body a.mention:is(:active, :focus, :hover),
-.app-body :is(.account__header__fields, .account__header__content) a:is(:active, :focus, :hover),
+.app-body :is(.account__header__fields, .account__header__content, [class*="_account_bio__bio"]) a:is(:active, :focus, :hover),
 .app-body :is(.detailed-status__datetime, .status__relative-time):is(:active, :focus, :hover) {
     text-decoration: none !important;
 }
@@ -2498,7 +2498,11 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .not
     border-radius: 8px;
     overflow: hidden;
 }
-.app-body :is(.status, .detailed-status) .poll__option {
+/* Scoped to the post's poll, not the composer's or the report dialog's. 5.0
+   rebuilt the post as a CSS module, so .status no longer wraps it; .poll does
+   in both versions. Without this the option loses its stacking and the bar
+   below paints over the label. */
+.app-body :is(.status, .detailed-status, .poll) .poll__option {
     border: 1px solid var(--color-lines-translucent);
     color: var(--color-content-fg);
     font-weight: 500;
@@ -5009,7 +5013,12 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     top: unset;
     vertical-align: bottom;
 }
-.app-body .account__header__content a {
+/* 5.0 moved the bio into its own component (account_bio), which colours its
+   links like body text and underlines the links themselves; the theme draws
+   them in the accent and underlines the text inside them (see Links), so the
+   link's own line has to go or mentions show two. */
+.app-body .account__header__content a,
+.app-body [class*="_account_bio__bio"] a {
     color: var(--color-accent);
     text-decoration: none;
 }
@@ -5800,7 +5809,12 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     top: 50%;
     transform: translateY(-50%);
 }
-.app-body .search__input:where(:not(.active), .active) {
+/* 5.0 moved the search field's styling into a CSS module, so .search__input
+   no longer matches there and the field fell back to a transparent pill. The
+   new class is matched on the input only: the icon wrapper's class starts
+   with the same name (…__searchIcon). */
+.app-body .search__input:where(:not(.active), .active),
+.app-body input[class*="_components_search__search"] {
     border-radius: 8px;
     background-color: var(--color-accent-bg);
     color: var(--color-content-fg);
@@ -5817,17 +5831,20 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     border-radius: 8px;
 }
 .app-body .search__input::placeholder,
+.app-body input[class*="_components_search__search"]::placeholder,
 .app-body .compose-form .spoiler-input__input::placeholder {
     font-weight: 500;
     color: var(--color-accent);
 }
-.app-body .search__input:focus {
+.app-body .search__input:focus,
+.app-body input[class*="_components_search__search"]:focus {
     border-color: var(--color-accent);
     background-color: var(--color-content-bg);
     outline: 3px solid var(--color-accent-bg);
     border-radius: 8px;
 }
 .app-body .search__input:focus::placeholder,
+.app-body input[class*="_components_search__search"]:focus::placeholder,
 .app-body .compose-form .spoiler-input__input:focus::placeholder {
     color: var(--color-content-fg);
     opacity: .4;
@@ -8176,6 +8193,22 @@ a:is(.active,
     content: var(--meta);
     color: var(--color-fg-muted);
     order: 10;
+}
+/* 4.6 rebuilt the footer as a CSS module (link_footer.module.scss) and 5.0
+   replaced it with another one (footer_links), so .link-footer above has not
+   matched since 4.6 and the signature line went missing. Same treatment on
+   the new hooks. The multi-column layout is left out, as above. */
+.app-body [class*="_link_footer__wrapper"]:not([data-context="multi-column"])::after {
+    content: var(--meta);
+    color: var(--color-fg-muted);
+}
+.app-body [class*="_footer_links__root"] {
+    color: var(--color-fg-muted);
+}
+.app-body [class*="_footer_links__root"]::after {
+    content: var(--meta);
+    display: block;
+    margin-top: 12px;
 }
 
 /* Server banner */
