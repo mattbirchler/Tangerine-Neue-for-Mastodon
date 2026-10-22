@@ -7551,6 +7551,17 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     75%  { rotate: 3deg; }
     100% { rotate: 0deg; }
 }
+.app-body [class*="_compose_redesign__footer"] [class*="_comp_button_redesign__iconOnly"][class*="_comp_button_redesign__tonal"] {
+    --bg: var(--color-accent-bg);
+    --fg: var(--color-accent);
+    --bg-hover: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
+}
+.app-body [class*="_compose_redesign__footer"] [class*="_comp_button_redesign__iconOnly"][class*="_comp_button_redesign__tonal"]:is([aria-pressed="true"], [aria-expanded="true"]) {
+    --bg: var(--color-accent);
+    --fg: var(--color-accent-fg);
+    background-color: var(--bg);
+    color: var(--fg);
+}
 @keyframes t-spring-rise {
     from { translate: 0 48px; scale: 0.92; }
     to   { translate: 0 0; scale: 1; }
