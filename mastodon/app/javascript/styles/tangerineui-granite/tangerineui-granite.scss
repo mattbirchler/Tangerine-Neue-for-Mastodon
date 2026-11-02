@@ -7599,6 +7599,50 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     background-color: var(--bg);
     color: var(--fg);
 }
+
+/* 📝 Floating composer (5.0) */
+@media (min-width: 760px) {
+    .app-body :is([class*="_compose_redesign_trigger__root"], [class*="_feat_compose_trigger__root"]) {
+        padding-bottom: 16px;
+    }
+    .app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"]) {
+        margin-inline: 12px;
+        max-height: calc(100vh - 48px);
+        border: 1px solid var(--color-lines);
+        border-radius: 20px;
+        background-color: color-mix(in srgb, var(--color-content-bg), transparent 8%);
+        -webkit-backdrop-filter: blur(24px) saturate(1.4);
+        backdrop-filter: blur(24px) saturate(1.4);
+        box-shadow:
+            0 1px 2px rgb(0 0 0 / 0.12),
+            0 12px 32px -6px rgb(0 0 0 / 0.3),
+            0 24px 64px -16px color-mix(in srgb, var(--color-accent) 25%, transparent);
+    }
+}
+.app-body :is([class*="_compose_redesign__header"], [class*="_feat_compose__header"]) {
+    position: relative;
+    align-items: center;
+}
+.app-body :is([class*="_compose_redesign__header"], [class*="_feat_compose__header"]) > h2 {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    pointer-events: none;
+}
+.app-body :is([class*="_compose_redesign__header"], [class*="_feat_compose__header"]) > h2 + * {
+    margin-inline-start: auto;
+}
+.app-body :is([class*="_compose_redesign__counter"], [class*="_feat_compose__counter"]) {
+    font-family: inherit;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-fg-muted);
+}
+.app-body textarea:is([class*="_compose_redesign__textarea"], [class*="_feat_compose__textarea"]):focus-visible {
+    outline: none;
+}
 html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(.load-more, .load-gap) {
     width: fit-content;
     margin: 16px auto;
