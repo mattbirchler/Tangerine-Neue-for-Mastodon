@@ -5842,7 +5842,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
    new class is matched on the input only: the icon wrapper's class starts
    with the same name (…__searchIcon). */
 .app-body .search__input:where(:not(.active), .active),
-.app-body input[class*="_components_search__search"] {
+.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"]) {
     border-radius: 8px;
     background-color: var(--color-accent-bg);
     color: var(--color-content-fg);
@@ -5859,20 +5859,20 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     border-radius: 8px;
 }
 .app-body .search__input::placeholder,
-.app-body input[class*="_components_search__search"]::placeholder,
+.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"])::placeholder,
 .app-body .compose-form .spoiler-input__input::placeholder {
     font-weight: 500;
     color: var(--color-accent);
 }
 .app-body .search__input:focus,
-.app-body input[class*="_components_search__search"]:focus {
+.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"]):focus {
     border-color: var(--color-accent);
     background-color: var(--color-content-bg);
     outline: 3px solid var(--color-accent-bg);
     border-radius: 8px;
 }
 .app-body .search__input:focus::placeholder,
-.app-body input[class*="_components_search__search"]:focus::placeholder,
+.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"]):focus::placeholder,
 .app-body .compose-form .spoiler-input__input:focus::placeholder {
     color: var(--color-content-fg);
     opacity: .4;
