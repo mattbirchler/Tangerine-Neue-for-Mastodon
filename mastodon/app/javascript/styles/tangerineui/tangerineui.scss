@@ -7643,6 +7643,61 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
 .app-body textarea:is([class*="_compose_redesign__textarea"], [class*="_feat_compose__textarea"]):focus-visible {
     outline: none;
 }
+
+/* 🧭 Sidebar order (5.0) */
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) {
+    --tng-nav-inset: 16px;
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) > :is(ul[class*="_navigation_panel_redesign__list"], footer[class*="_navigation_panel_redesign__footer"]),
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] ul[class*="_navigation_panel_redesign__footerNav"] {
+    display: contents;
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) > :first-child { order: -1; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) > :last-child { order: 99; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] :is(ul[class*="_navigation_panel_redesign__list"], ul[class*="_navigation_panel_redesign__footerNav"]) > li {
+    order: 10;
+    margin-inline: var(--tng-nav-inset);
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href="/home"]) { order: 1; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href="/notifications"]) { order: 2; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a:is([href="/explore"], [href="/search"])) { order: 3; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href^="/public"]) { order: 4; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href="/conversations"]) { order: 5; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href="/bookmarks"]) { order: 6; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href^="/admin"]) { order: 7; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) [class*="_navigation_panel_redesign__newPostButton"] {
+    order: 8;
+    margin: 0 var(--tng-nav-inset);
+    padding-block: 12px 4px;
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) [class*="_navigation_panel_redesign_account_card_and_menu__root"] {
+    order: 0;
+    width: auto;
+    margin: 0 var(--tng-nav-inset) 16px;
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) footer[class*="_navigation_panel_redesign__footer"] > :last-child {
+    order: 21;
+    margin: auto 24px 0;
+    padding-bottom: 24px;
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] [class*="_navigation_panel_redesign_navigation_link__linkStacked"] {
+    flex-direction: row;
+    row-gap: 0;
+    padding-inline: var(--space-2, 8px);
+    font-family: var(--font-body);
+    font-size: var(--fs-14);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--ls-normal);
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] [class*="_navigation_panel_redesign_navigation_link__linkStacked"][aria-current="page"] {
+    font-weight: bold;
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] [class*="_navigation_panel_redesign_navigation_link__linkStacked"] [class*="_navigation_panel_redesign_navigation_link__label"] {
+    text-align: start;
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] [class*="_navigation_panel_redesign_navigation_link__linkStacked"] [class*="_navigation_panel_redesign_navigation_link__badge"] {
+    position: static;
+}
 html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(.load-more, .load-gap) {
     width: fit-content;
     margin: 16px auto;
