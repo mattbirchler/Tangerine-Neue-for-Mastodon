@@ -9,7 +9,7 @@
 
 /* 📄 Meta */
 :root {
-    --version: "v3.0.0-beta.3";
+    --version: "v3.0.0-beta.4";
 
     --variant-name: "{{variant-name_12}}";
     --variant-emoji: "\1F{{variant-emoji_13}}\00A0";
@@ -174,6 +174,7 @@
     --color-bg-highlight: color-mix(in srgb, var(--color-accent) 10%, transparent);
     --color-border-strong: var(--color-fg);
     --color-border-input: var(--color-lines);
+    --color-border-column: var(--color-lines);
     --shadow-strength-primary: 12%;
     --color-shadow-primary: color-mix(in srgb, #000000 var(--shadow-strength-primary), transparent);
     --overlay-icon-shadow: drop-shadow(0 0 8px var(--color-shadow-primary));
@@ -5814,7 +5815,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
    new class is matched on the input only: the icon wrapper's class starts
    with the same name (…__searchIcon). */
 .app-body .search__input:where(:not(.active), .active),
-.app-body input[class*="_components_search__search"] {
+.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"]) {
     border-radius: 8px;
     background-color: var(--color-accent-bg);
     color: var(--color-content-fg);
@@ -5831,20 +5832,20 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     border-radius: 8px;
 }
 .app-body .search__input::placeholder,
-.app-body input[class*="_components_search__search"]::placeholder,
+.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"])::placeholder,
 .app-body .compose-form .spoiler-input__input::placeholder {
     font-weight: 500;
     color: var(--color-accent);
 }
 .app-body .search__input:focus,
-.app-body input[class*="_components_search__search"]:focus {
+.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"]):focus {
     border-color: var(--color-accent);
     background-color: var(--color-content-bg);
     outline: 3px solid var(--color-accent-bg);
     border-radius: 8px;
 }
 .app-body .search__input:focus::placeholder,
-.app-body input[class*="_components_search__search"]:focus::placeholder,
+.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"]):focus::placeholder,
 .app-body .compose-form .spoiler-input__input:focus::placeholder {
     color: var(--color-content-fg);
     opacity: .4;
@@ -7361,7 +7362,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     transform-origin: center;
     animation: t-modal-open 250ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-.app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_compose_redesign_trigger__composerMinimized"]) {
+.app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"]) {
     transform-origin: bottom center;
     animation:
         t-spring-rise 400ms var(--tng-spring),
@@ -7560,16 +7561,115 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     75%  { rotate: 3deg; }
     100% { rotate: 0deg; }
 }
-.app-body :is([class*="_compose_redesign__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
+.app-body :is([class*="_compose_redesign__root"], [class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
     --bg: var(--color-accent-bg);
     --fg: var(--color-accent);
     --bg-hover: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
 }
-.app-body :is([class*="_compose_redesign__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"]:is([aria-pressed="true"], [aria-expanded="true"]) {
+.app-body :is([class*="_compose_redesign__root"], [class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"]:is([aria-pressed="true"], [aria-expanded="true"]) {
     --bg: var(--color-accent);
     --fg: var(--color-accent-fg);
     background-color: var(--bg);
     color: var(--fg);
+}
+
+/* 📝 Floating composer (5.0) */
+@media (min-width: 760px) {
+    .app-body :is([class*="_compose_redesign_trigger__root"], [class*="_feat_compose_trigger__root"]) {
+        padding-bottom: 16px;
+    }
+    .app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"]) {
+        margin-inline: 12px;
+        max-height: calc(100vh - 48px);
+        border: 1px solid var(--color-lines);
+        border-radius: 20px;
+        background-color: color-mix(in srgb, var(--color-content-bg), transparent 8%);
+        -webkit-backdrop-filter: blur(24px) saturate(1.4);
+        backdrop-filter: blur(24px) saturate(1.4);
+        box-shadow:
+            0 1px 2px rgb(0 0 0 / 0.12),
+            0 12px 32px -6px rgb(0 0 0 / 0.3),
+            0 24px 64px -16px color-mix(in srgb, var(--color-accent) 25%, transparent);
+    }
+}
+.app-body :is([class*="_compose_redesign__header"], [class*="_feat_compose__header"]) {
+    position: relative;
+    align-items: center;
+}
+.app-body :is([class*="_compose_redesign__header"], [class*="_feat_compose__header"]) > h2 {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    pointer-events: none;
+}
+.app-body :is([class*="_compose_redesign__header"], [class*="_feat_compose__header"]) > h2 + * {
+    margin-inline-start: auto;
+}
+.app-body :is([class*="_compose_redesign__counter"], [class*="_feat_compose__counter"]) {
+    font-family: inherit;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-fg-muted);
+}
+.app-body textarea:is([class*="_compose_redesign__textarea"], [class*="_feat_compose__textarea"]):focus-visible {
+    outline: none;
+}
+
+/* 🧭 Sidebar order (5.0) */
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) {
+    --tng-nav-inset: 16px;
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) > :is(ul[class*="_navigation_panel_redesign__list"], footer[class*="_navigation_panel_redesign__footer"]),
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] ul[class*="_navigation_panel_redesign__footerNav"] {
+    display: contents;
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) > :first-child { order: -1; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) > :last-child { order: 99; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] :is(ul[class*="_navigation_panel_redesign__list"], ul[class*="_navigation_panel_redesign__footerNav"]) > li {
+    order: 10;
+    margin-inline: var(--tng-nav-inset);
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href="/home"]) { order: 1; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href="/notifications"]) { order: 2; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a:is([href="/explore"], [href="/search"])) { order: 3; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href^="/public"]) { order: 4; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href="/conversations"]) { order: 5; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href="/bookmarks"]) { order: 6; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href^="/admin"]) { order: 7; }
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) [class*="_navigation_panel_redesign__newPostButton"] {
+    order: 8;
+    margin: 0 var(--tng-nav-inset);
+    padding-block: 12px 4px;
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) [class*="_navigation_panel_redesign_account_card_and_menu__root"] {
+    order: 0;
+    width: auto;
+    margin: 0 var(--tng-nav-inset) 16px;
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) footer[class*="_navigation_panel_redesign__footer"] > :last-child {
+    order: 21;
+    margin: auto 24px 0;
+    padding-bottom: 24px;
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] [class*="_navigation_panel_redesign_navigation_link__linkStacked"] {
+    flex-direction: row;
+    row-gap: 0;
+    padding-inline: var(--space-2, 8px);
+    font-family: var(--font-body);
+    font-size: var(--fs-14);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--ls-normal);
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] [class*="_navigation_panel_redesign_navigation_link__linkStacked"][aria-current="page"] {
+    font-weight: bold;
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] [class*="_navigation_panel_redesign_navigation_link__linkStacked"] [class*="_navigation_panel_redesign_navigation_link__label"] {
+    text-align: start;
+}
+.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] [class*="_navigation_panel_redesign_navigation_link__linkStacked"] [class*="_navigation_panel_redesign_navigation_link__badge"] {
+    position: static;
 }
 html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(.load-more, .load-gap) {
     width: fit-content;
@@ -7661,7 +7761,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(
 }
 @media (prefers-reduced-motion: reduce) {
     .app-body .modal-root__container > [class*="_comp_modal_shell_redesign__modal"],
-    .app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_compose_redesign_trigger__composerMinimized"]) {
+    .app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"]) {
         animation: none;
     }
 }
