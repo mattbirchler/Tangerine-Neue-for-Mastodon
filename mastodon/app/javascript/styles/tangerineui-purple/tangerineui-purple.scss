@@ -6975,6 +6975,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
 .app-body .status__content a,
 .app-body .status__content a.hashtag,
 .app-body .status__content a.unhandled-link,
+.app-body [class*="_comp_status_quote__body"] a, /* 5.0's quoted post */
 .app-body .column-back-button,
 .app-body .about__section__title,
 .app-body .prose a,
