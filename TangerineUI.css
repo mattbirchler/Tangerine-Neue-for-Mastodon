@@ -174,6 +174,7 @@
     --color-bg-highlight: color-mix(in srgb, var(--color-accent) 10%, transparent);
     --color-border-strong: var(--color-fg);
     --color-border-input: var(--color-lines);
+    --color-border-column: var(--color-lines);
     --shadow-strength-primary: 12%;
     --color-shadow-primary: color-mix(in srgb, #000000 var(--shadow-strength-primary), transparent);
     --overlay-icon-shadow: drop-shadow(0 0 8px var(--color-shadow-primary));
