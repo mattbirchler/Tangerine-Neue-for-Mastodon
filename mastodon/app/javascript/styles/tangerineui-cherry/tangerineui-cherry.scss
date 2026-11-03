@@ -5047,7 +5047,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
    link's own line has to go or mentions show two. */
 .app-body .account__header__content a,
 .app-body [class*="_account_bio__bio"] a,
-.app-body [class*="_feat_account_edit__bio"] a /* the same bio on the Edit Profile page */ {
+.app-body [class*="_feat_account_edit__bio"] a {
     color: var(--color-accent);
     text-decoration: none;
 }
