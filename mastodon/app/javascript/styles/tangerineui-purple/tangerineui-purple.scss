@@ -7748,6 +7748,18 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
 .app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] [class*="_navigation_panel_redesign_navigation_link__linkStacked"] [class*="_navigation_panel_redesign_navigation_link__badge"] {
     position: static;
 }
+
+/* 🗂️ Advanced UI (5.0) */
+.layout-multiple-columns [class*="_comp_column__root"][class*="_comp_column__root"] {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 360px;
+}
+.layout-multiple-columns [class*="_styles_multi_column__discoveryColumn"][class*="_comp_column__root"][class*="_comp_column__root"] {
+    flex: 0 0 320px;
+    width: 320px;
+    min-width: 0;
+}
 html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(.load-more, .load-gap) {
     width: fit-content;
     margin: 16px auto;
