@@ -7602,11 +7602,22 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
 }
 
 /* 📝 Floating composer (5.0) */
+@property --tng-composer-open {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+}
+@property --tng-composer-height {
+    syntax: '<length>';
+    inherits: true;
+    initial-value: 0px;
+}
 @media (min-width: 760px) {
     .app-body :is([class*="_compose_redesign_trigger__root"], [class*="_feat_compose_trigger__root"]) {
         padding-bottom: 16px;
     }
-    .app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"]) {
+    .app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"]),
+    .app-body [class*="_comp_columns_area__main"]::after {
         margin-inline: 28px;
         max-height: calc(100vh - 48px);
         border: 1px solid var(--color-lines);
@@ -7618,6 +7629,44 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
             0 1px 2px rgb(0 0 0 / 0.12),
             0 12px 32px -6px rgb(0 0 0 / 0.3),
             0 24px 64px -16px color-mix(in srgb, var(--color-accent) 25%, transparent);
+    }
+    html {
+        --tng-composer-height: var(--current-composer-height, 0px);
+        transition:
+            --tng-composer-open 220ms cubic-bezier(0.4, 0, 1, 1),
+            --tng-composer-height 0s 220ms;
+    }
+    html:has(:is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"])) {
+        --tng-composer-open: 1;
+        transition: none;
+    }
+    html:has(:is([class*="_compose_redesign_trigger__composerMinimized"], [class*="_feat_compose_trigger__composerMinimized"])) {
+        --tng-composer-height: calc(var(--current-composer-height, 0px) + 16px);
+    }
+    .app-body [class*="_comp_columns_area__main"]::after {
+        --tng-ghost-height: max(0px, var(--tng-composer-height) - 16px);
+        content: "";
+        position: sticky;
+        bottom: 16px;
+        z-index: 200;
+        flex: none;
+        box-sizing: border-box;
+        height: var(--tng-ghost-height);
+        margin-top: calc(var(--tng-ghost-height) * -1);
+        pointer-events: none;
+        opacity: var(--tng-composer-open);
+        translate: 0 calc((1 - var(--tng-composer-open)) * 32px);
+        scale: calc(0.96 + var(--tng-composer-open) * 0.04);
+        transform-origin: bottom center;
+        filter: blur(calc((1 - var(--tng-composer-open)) * 2px));
+    }
+    html:has(:is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"])) .app-body [class*="_comp_columns_area__main"]::after {
+        visibility: hidden;
+    }
+}
+@media (min-width: 760px) and (prefers-reduced-motion: reduce) {
+    html {
+        transition: none;
     }
 }
 .app-body :is([class*="_compose_redesign__header"], [class*="_feat_compose__header"]) {
