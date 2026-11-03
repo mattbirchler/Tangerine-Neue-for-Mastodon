@@ -1878,7 +1878,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .not
 .app-body a.status-link:not(.mention, .hashtag),
 .app-body .status__content a.unhandled-link,
 .app-body a:is(.status-link, .mention, .navigation-bar__profile-edit) span,
-.app-body :is(.account__header__fields, .account__header__content, [class*="_account_bio__bio"]) a span {
+.app-body :is(.account__header__fields, .account__header__content, [class*="_account_bio__bio"], [class*="_feat_account_edit__bio"]) a span {
     text-decoration-line: underline;
     text-decoration-color: color-mix(in srgb, var(--color-accent), transparent 55%);
     text-decoration-thickness: 2px;
@@ -1887,7 +1887,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .not
 .app-body a.status-link:not(.mention, .hashtag):is(:active, :focus, :hover),
 .app-body .status__content a.unhandled-link:hover,
 .app-body a:is(.status-link, .mention, .navigation-bar__profile-edit):is(:active, :focus, :hover) span,
-.app-body :is(.account__header__fields, .account__header__content, [class*="_account_bio__bio"], .trends__item__name) a:is(:active, :focus, :hover) span,
+.app-body :is(.account__header__fields, .account__header__content, [class*="_account_bio__bio"], [class*="_feat_account_edit__bio"], .trends__item__name) a:is(:active, :focus, :hover) span,
 .app-body
     :is(
         .detailed-status__display-name,
@@ -1905,7 +1905,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .not
         text-underline-offset: 2px;
 }
 .app-body a.mention:is(:active, :focus, :hover),
-.app-body :is(.account__header__fields, .account__header__content, [class*="_account_bio__bio"]) a:is(:active, :focus, :hover),
+.app-body :is(.account__header__fields, .account__header__content, [class*="_account_bio__bio"], [class*="_feat_account_edit__bio"]) a:is(:active, :focus, :hover),
 .app-body :is(.detailed-status__datetime, .status__relative-time):is(:active, :focus, :hover) {
     text-decoration: none !important;
 }
@@ -5046,7 +5046,8 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
    them in the accent and underlines the text inside them (see Links), so the
    link's own line has to go or mentions show two. */
 .app-body .account__header__content a,
-.app-body [class*="_account_bio__bio"] a {
+.app-body [class*="_account_bio__bio"] a,
+.app-body [class*="_feat_account_edit__bio"] a {
     color: var(--color-accent);
     text-decoration: none;
 }
