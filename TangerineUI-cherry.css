@@ -7580,7 +7580,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
         padding-bottom: 16px;
     }
     .app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"]) {
-        margin-inline: 12px;
+        margin-inline: 28px;
         max-height: calc(100vh - 48px);
         border: 1px solid var(--color-lines);
         border-radius: 20px;
