@@ -7685,10 +7685,13 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
 .app-body :is([class*="_compose_redesign__header"], [class*="_feat_compose__header"]) > h2 + * {
     margin-inline-start: auto;
 }
-.app-body :is([class*="_compose_redesign__counter"], [class*="_feat_compose__counter"]) {
+.app-body [class*="_feat_compose__counter"] {
     font-family: inherit;
     font-variant-numeric: tabular-nums;
     color: var(--color-fg-muted);
+}
+.app-body [class*="_feat_compose__counterError"] {
+    color: var(--color-text-error);
 }
 .app-body textarea:is([class*="_compose_redesign__textarea"], [class*="_feat_compose__textarea"]):focus-visible {
     outline: none;
