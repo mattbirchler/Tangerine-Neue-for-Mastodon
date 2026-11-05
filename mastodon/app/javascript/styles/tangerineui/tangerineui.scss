@@ -7648,6 +7648,18 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     from { scale: 0 1; }
     to   { scale: 1 1; }
 }
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body .media-modal :is(.zoomable-image, .video-player, .audio-player) {
+        animation: t-lightbox-in 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    :root:not(.reduce-motion) .app-body .media-modal :is(.media-modal__nav, .media-modal__buttons, .media-modal__pagination) {
+        animation: t-fade-in 260ms ease-out 160ms both;
+    }
+}
+@keyframes t-lightbox-in {
+    from { opacity: 0; scale: 0.94; }
+    to   { opacity: 1; scale: 1; }
+}
 .app-body :is([class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
     --bg: var(--color-accent-bg);
     --fg: var(--color-accent);
