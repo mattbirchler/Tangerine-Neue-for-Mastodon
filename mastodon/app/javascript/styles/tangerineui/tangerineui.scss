@@ -7681,6 +7681,15 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     from { opacity: 0; translate: 0 -10px; }
     to   { opacity: 1; translate: 0 0; }
 }
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body [class*="_compose_components_attachments__mediaUpload"]:not([class*="mediaUploadPending"]) {
+        animation: t-tile-in 450ms var(--tng-spring) both;
+    }
+}
+@keyframes t-tile-in {
+    from { scale: 0.88; opacity: 0; }
+    to   { scale: 1; opacity: 1; }
+}
 .app-body :is([class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
     --bg: var(--color-accent-bg);
     --fg: var(--color-accent);
