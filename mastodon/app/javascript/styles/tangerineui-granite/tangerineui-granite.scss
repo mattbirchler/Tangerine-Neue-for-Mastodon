@@ -7715,6 +7715,18 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
         scale: 1.05;
     }
 }
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body [class*="_feat_compose__counterError"] {
+        display: inline-block;
+        animation: t-shake 420ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+}
+@keyframes t-shake {
+    10%, 90% { translate: -1px 0; }
+    20%, 80% { translate: 2px 0; }
+    30%, 50%, 70% { translate: -3px 0; }
+    40%, 60% { translate: 3px 0; }
+}
 .app-body :is([class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
     --bg: var(--color-accent-bg);
     --fg: var(--color-accent);
