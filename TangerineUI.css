@@ -2577,7 +2577,6 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .not
 }
 .app-body .poll__option:has(+ .poll__chart.leading) .poll__voted {
     right: 28px;
-    color: var(--color-confirm-fg);
 }
 .app-body .poll__chart {
     background: var(--color-lines);
@@ -2597,8 +2596,8 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .not
 .app-body .poll__chart.leading,
 .app-body .muted .poll__chart.leading,
 .app-body .poll__option:has(.poll__voted) + .poll__chart.leading {
-    background: var(--color-confirm);
-    opacity: .5;
+    background: color-mix(in srgb, var(--color-accent), transparent 60%);
+    opacity: 1;
 }
 .app-body .poll__option:has(.poll__voted) {
     border-color: var(--color-accent);
@@ -2610,16 +2609,24 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .not
 }
 .app-body .poll__option:has(+ .poll__chart.leading),
 .app-body .poll__option:has(.poll__voted):has(+ .poll__chart.leading) {
-    border-color: color-mix(in srgb, var(--color-confirm), transparent 30%);
+    border-color: var(--color-accent-lines);
     color: var(--color-content-fg);
     background-color: transparent;
-    background-size: 20px;
-    background-position: right 8px center;
-    background-repeat: no-repeat;
-    background-image: var(--icon-trophy);
+}
+.app-body .poll__option:has(+ .poll__chart.leading)::after {
+    content: "";
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    translate: 0 -50%;
+    background-color: var(--color-accent);
+    mask: var(--icon-trophy) center / contain no-repeat;
+    -webkit-mask: var(--icon-trophy) center / contain no-repeat;
 }
 .app-body .poll__option:has(.poll__voted):has(+ .poll__chart.leading) {
-    border-color: var(--color-confirm);
+    border-color: var(--color-accent);
 }
 
 /* Emoji picker */
@@ -7372,6 +7379,15 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
     border-radius: 8px;
+}
+.app-body [class*="_comp_form_fields_text_input__input"]:required:user-valid {
+    outline-color: color-mix(in srgb, var(--color-accent), transparent 50%);
+}
+:is(.app-body, .admin-wrapper, .form-container) .simple_form :is(input[type="text"], input[type="number"], input[type="email"], input[type="password"], input[type="url"], input[type="datetime-local"], textarea):required:valid {
+    border-color: color-mix(in srgb, var(--color-accent), transparent 50%);
+}
+.app-body [class*="_comp_form_fields_text_input__input"]:focus {
+    outline-color: var(--color-accent);
 }
 .app-body [class*="_feat_compose_trigger__composer"] {
     transform-origin: bottom center;
