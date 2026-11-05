@@ -186,7 +186,7 @@
     --color-border-media: rgba(255, 255, 255, 0.15);
 }
 
-:root:root:is([data-theme-color], :has([class*="_comp_columns_area_"])),
+:root:root:is([data-theme-color], :has([class*="_comp_columns_area_"], .form-container)),
 .app-body [data-color-scheme] {
     --base-color-bg: var(--color-content-bg);
     --base-color-bg-desktop: var(--color-bg);
@@ -2604,7 +2604,6 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .not
 }
 .app-body .poll__option:has(+ .poll__chart.leading) .poll__voted {
     right: 28px;
-    color: var(--color-confirm-fg);
 }
 .app-body .poll__chart {
     background: var(--color-lines);
@@ -2624,8 +2623,8 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .not
 .app-body .poll__chart.leading,
 .app-body .muted .poll__chart.leading,
 .app-body .poll__option:has(.poll__voted) + .poll__chart.leading {
-    background: var(--color-confirm);
-    opacity: .5;
+    background: color-mix(in srgb, var(--color-accent), transparent 60%);
+    opacity: 1;
 }
 .app-body .poll__option:has(.poll__voted) {
     border-color: var(--color-accent);
@@ -2637,16 +2636,24 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .not
 }
 .app-body .poll__option:has(+ .poll__chart.leading),
 .app-body .poll__option:has(.poll__voted):has(+ .poll__chart.leading) {
-    border-color: color-mix(in srgb, var(--color-confirm), transparent 30%);
+    border-color: var(--color-accent-lines);
     color: var(--color-content-fg);
     background-color: transparent;
-    background-size: 20px;
-    background-position: right 8px center;
-    background-repeat: no-repeat;
-    background-image: var(--icon-trophy);
+}
+.app-body .poll__option:has(+ .poll__chart.leading)::after {
+    content: "";
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    translate: 0 -50%;
+    background-color: var(--color-accent);
+    mask: var(--icon-trophy) center / contain no-repeat;
+    -webkit-mask: var(--icon-trophy) center / contain no-repeat;
 }
 .app-body .poll__option:has(.poll__voted):has(+ .poll__chart.leading) {
-    border-color: var(--color-confirm);
+    border-color: var(--color-accent);
 }
 
 /* Emoji picker */
@@ -5843,7 +5850,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
    new class is matched on the input only: the icon wrapper's class starts
    with the same name (…__searchIcon). */
 .app-body .search__input:where(:not(.active), .active),
-.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"]) {
+.app-body input[class*="_comp_search__search"] {
     border-radius: 8px;
     background-color: var(--color-accent-bg);
     color: var(--color-content-fg);
@@ -5860,20 +5867,20 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     border-radius: 8px;
 }
 .app-body .search__input::placeholder,
-.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"])::placeholder,
+.app-body input[class*="_comp_search__search"]::placeholder,
 .app-body .compose-form .spoiler-input__input::placeholder {
     font-weight: 500;
     color: var(--color-accent);
 }
 .app-body .search__input:focus,
-.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"]):focus {
+.app-body input[class*="_comp_search__search"]:focus {
     border-color: var(--color-accent);
     background-color: var(--color-content-bg);
     outline: 3px solid var(--color-accent-bg);
     border-radius: 8px;
 }
 .app-body .search__input:focus::placeholder,
-.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"]):focus::placeholder,
+.app-body input[class*="_comp_search__search"]:focus::placeholder,
 .app-body .compose-form .spoiler-input__input:focus::placeholder {
     color: var(--color-content-fg);
     opacity: .4;
@@ -6663,9 +6670,14 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     font-weight: 600;
     transition: all .3s;
 }
-.app-body .lists__item__title:hover {
-    color: var(--color-accent);
+.app-body .lists__item:has(a.lists__item__title) {
+    transition: background-color .3s;
+}
+.app-body .lists__item:has(a.lists__item__title):hover {
     background-color: var(--color-content-secondary-bg);
+}
+.app-body .lists__item:hover a.lists__item__title {
+    color: var(--color-accent);
 }
 .app-body .simple_form .input.with_label .label_input>label {
     color: var(--color-content-fg);
@@ -7390,7 +7402,21 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     transform-origin: center;
     animation: t-modal-open 250ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-.app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"]) {
+.app-body :is([class*="_comp_column_header__title"], [class*="_comp_modal_shell_redesign__title"]):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 8px;
+}
+.app-body [class*="_comp_form_fields_text_input__input"]:required:user-valid {
+    outline-color: color-mix(in srgb, var(--color-accent), transparent 50%);
+}
+:is(.app-body, .admin-wrapper, .form-container) .simple_form :is(input[type="text"], input[type="number"], input[type="email"], input[type="password"], input[type="url"], input[type="datetime-local"], textarea):required:valid {
+    border-color: color-mix(in srgb, var(--color-accent), transparent 50%);
+}
+.app-body [class*="_comp_form_fields_text_input__input"]:focus {
+    outline-color: var(--color-accent);
+}
+.app-body [class*="_feat_compose_trigger__composer"] {
     transform-origin: bottom center;
     animation:
         t-spring-rise 400ms var(--tng-spring),
@@ -7589,12 +7615,12 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     75%  { rotate: 3deg; }
     100% { rotate: 0deg; }
 }
-.app-body :is([class*="_compose_redesign__root"], [class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
+.app-body :is([class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
     --bg: var(--color-accent-bg);
     --fg: var(--color-accent);
     --bg-hover: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
 }
-.app-body :is([class*="_compose_redesign__root"], [class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"]:is([aria-pressed="true"], [aria-expanded="true"]) {
+.app-body :is([class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"]:is([aria-pressed="true"], [aria-expanded="true"]) {
     --bg: var(--color-accent);
     --fg: var(--color-accent-fg);
     background-color: var(--bg);
@@ -7613,10 +7639,10 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     initial-value: 0px;
 }
 @media (min-width: 760px) {
-    .app-body :is([class*="_compose_redesign_trigger__root"], [class*="_feat_compose_trigger__root"]) {
+    .app-body [class*="_feat_compose_trigger__root"] {
         padding-bottom: 16px;
     }
-    .app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"]),
+    .app-body [class*="_feat_compose_trigger__composer"],
     .app-body [class*="_comp_columns_area__main"]::after {
         margin-inline: 28px;
         max-height: calc(100vh - 48px);
@@ -7636,11 +7662,11 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
             --tng-composer-open 220ms cubic-bezier(0.4, 0, 1, 1),
             --tng-composer-height 0s 220ms;
     }
-    html:has(:is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"])) {
+    html:has([class*="_feat_compose_trigger__composer"]) {
         --tng-composer-open: 1;
         transition: none;
     }
-    html:has(:is([class*="_compose_redesign_trigger__composerMinimized"], [class*="_feat_compose_trigger__composerMinimized"])) {
+    html:has([class*="_feat_compose_trigger__composerMinimized"]) {
         --tng-composer-height: calc(var(--current-composer-height, 0px) + 16px);
     }
     .app-body [class*="_comp_columns_area__main"]::after {
@@ -7660,7 +7686,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
         transform-origin: bottom center;
         filter: blur(calc((1 - var(--tng-composer-open)) * 2px));
     }
-    html:has(:is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"])) .app-body [class*="_comp_columns_area__main"]::after {
+    html:has([class*="_feat_compose_trigger__composer"]) .app-body [class*="_comp_columns_area__main"]::after {
         visibility: hidden;
     }
 }
@@ -7669,11 +7695,11 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
         transition: none;
     }
 }
-.app-body :is([class*="_compose_redesign__header"], [class*="_feat_compose__header"]) {
+.app-body [class*="_feat_compose__header"] {
     position: relative;
     align-items: center;
 }
-.app-body :is([class*="_compose_redesign__header"], [class*="_feat_compose__header"]) > h2 {
+.app-body [class*="_feat_compose__header"] > h2 {
     position: absolute;
     inset: 0;
     display: flex;
@@ -7682,15 +7708,18 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     margin: 0;
     pointer-events: none;
 }
-.app-body :is([class*="_compose_redesign__header"], [class*="_feat_compose__header"]) > h2 + * {
+.app-body [class*="_feat_compose__header"] > h2 + * {
     margin-inline-start: auto;
 }
-.app-body :is([class*="_compose_redesign__counter"], [class*="_feat_compose__counter"]) {
+.app-body [class*="_feat_compose__counter"] {
     font-family: inherit;
     font-variant-numeric: tabular-nums;
     color: var(--color-fg-muted);
 }
-.app-body textarea:is([class*="_compose_redesign__textarea"], [class*="_feat_compose__textarea"]):focus-visible {
+.app-body [class*="_feat_compose__counterError"] {
+    color: var(--color-text-error);
+}
+.app-body textarea[class*="_feat_compose__textarea"]:focus-visible {
     outline: none;
 }
 
@@ -7780,8 +7809,6 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(
 .app-body .notification-group__main > [class*="_comp_card__root"]:not([class*="_comp_card__rootUnclickable"]) {
     cursor: pointer;
 }
-.app-body [class*="_feat_account_edit__editButton"],
-.app-body .button[class*="_feat_account_edit__editButton"],
 .app-body .button[class*="verifiedLinkHelpButton"],
 .app-body .button[class*="verifiedLinkHelpButton"]:is(:active, :focus) {
     border-color: transparent;
@@ -7789,15 +7816,9 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(
     background-color: var(--color-accent-bg);
     color: var(--color-accent);
 }
-.app-body [class*="_feat_account_edit__editButton"]:is(:hover, :focus-visible),
-.app-body .button[class*="_feat_account_edit__editButton"]:is(:hover, :focus-visible),
 .app-body .button[class*="verifiedLinkHelpButton"]:hover {
     background-color: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
     color: var(--color-accent);
-}
-.app-body [class*="_feat_account_edit__deleteButton"]:is(:hover, :focus-visible) {
-    background-color: color-mix(in srgb, var(--color-reject) 16%, transparent);
-    color: var(--color-reject);
 }
 .app-body [class*="_feat_account_edit__imageButton"] {
     border-color: rgb(255 255 255 / .18);
@@ -7838,7 +7859,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(
 }
 @media (prefers-reduced-motion: reduce) {
     .app-body .modal-root__container > [class*="_comp_modal_shell_redesign__modal"],
-    .app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"]) {
+    .app-body [class*="_feat_compose_trigger__composer"] {
         animation: none;
     }
 }
@@ -9850,7 +9871,7 @@ a:is(.active,
 /* Pinned badge: match the other post-header labels (boosted / show thread) —
    fully-rounded pill, page background, muted bold text, accent icon; reset the
    line-height it inherits from .status__info (which clipped the label). */
-.app-body ._feat_account_timeline__pinnedBadge {
+.app-body ._comp_status_header__pinnedBadge {
     line-height: normal;
     background-color: var(--color-bg);
     border-radius: 50px;
@@ -9858,11 +9879,11 @@ a:is(.active,
     font-weight: 600;
     padding: 4px 10px;
 }
-.app-body ._feat_account_timeline__pinnedBadge ._comp_badge__content {
+.app-body ._comp_status_header__pinnedBadge ._comp_badge__content {
     line-height: normal;
     overflow: visible;
 }
-.app-body ._feat_account_timeline__pinnedBadge .icon-pinned {
+.app-body ._comp_status_header__pinnedBadge .icon-pinned {
     fill: var(--color-accent);
     color: var(--color-accent);
 }
@@ -9872,12 +9893,57 @@ a:is(.active,
    These pages live outside .app-body and use <img class="logo logo--icon"
    src="logo.svg">, which can't be recoloured via fill — so replace the image
    content with the themed logo. */
-.sidebar-wrapper .logo--icon,
-.logo-container .logo {
+.sidebar-wrapper .logo--icon {
     content: var(--logo);
     width: 100px;
     height: 100px;
     object-fit: contain;
+}
+.logo-container .logo {
+    display: none;
+}
+.logo-container > a,
+.logo-container:not(:has(> a)) {
+    display: block;
+    width: 174px;
+    height: 44px;
+    margin-inline: auto;
+    background-image: var(--logo-wordmark);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.logo-container > a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 6px;
+    border-radius: 8px;
+}
+.admin-wrapper :is(input[type="checkbox"], input[type="radio"]),
+.form-container :is(input[type="checkbox"], input[type="radio"]) {
+    accent-color: var(--color-accent);
+}
+.admin-wrapper input[type="file"],
+.form-container input[type="file"] {
+    color: var(--color-content-fg-muted);
+    font: inherit;
+}
+.admin-wrapper input[type="file"]::file-selector-button,
+.form-container input[type="file"]::file-selector-button {
+    appearance: none;
+    margin-inline-end: 12px;
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 999px;
+    background-color: var(--color-accent-bg);
+    color: var(--color-accent);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .2s;
+}
+.admin-wrapper input[type="file"]::file-selector-button:hover,
+.form-container input[type="file"]::file-selector-button:hover {
+    background-color: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
 }
 /* On narrow displays the sidebar swaps the big logo for the Mastodon wordmark
    (.logo--wordmark). Its "m" is a hard-coded gradient inside a <use> symbol that
