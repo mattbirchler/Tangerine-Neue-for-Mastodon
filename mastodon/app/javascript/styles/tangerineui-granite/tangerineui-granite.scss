@@ -7615,6 +7615,141 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     75%  { rotate: 3deg; }
     100% { rotate: 0deg; }
 }
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body [class*="_comp_tooltip__tooltip"] {
+        animation: t-tooltip-in 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+}
+@keyframes t-tooltip-in {
+    from { opacity: 0; translate: 0 4px; }
+    to   { opacity: 1; translate: 0 0; }
+}
+.app-body [class*="_comp_tab_list__tab"]:not([class*="_comp_tab_list__tabList"]) {
+    position: relative;
+}
+.app-body [class*="_comp_tab_list__tab"].active {
+    border-bottom-color: transparent;
+}
+.app-body [class*="_comp_tab_list__tab"].active::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 4px;
+    border-radius: 4px 4px 0 0;
+    background-color: var(--color-accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body [class*="_comp_tab_list__tab"].active::after {
+        animation: t-underline-in 380ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+}
+@keyframes t-underline-in {
+    from { scale: 0 1; }
+    to   { scale: 1 1; }
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body .media-modal :is(.zoomable-image, .video-player, .audio-player) {
+        animation: t-lightbox-in 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    :root:not(.reduce-motion) .app-body .media-modal :is(.media-modal__nav, .media-modal__buttons, .media-modal__pagination) {
+        animation: t-fade-in 260ms ease-out 160ms both;
+    }
+}
+@keyframes t-lightbox-in {
+    from { opacity: 0; scale: 0.94; }
+    to   { opacity: 1; scale: 1; }
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body .account__avatar[class*="_comp_account_header__avatar"] {
+        animation: t-avatar-in 600ms var(--tng-spring) both;
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_account_header__displayNameWrapper"] {
+        animation: t-rise-in 420ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
+    }
+}
+@keyframes t-avatar-in {
+    from { scale: 0.6; opacity: 0; }
+    to   { scale: 1; opacity: 1; }
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body .load-more.load-gap {
+        animation: t-drop-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+}
+@keyframes t-drop-in {
+    from { opacity: 0; translate: 0 -10px; }
+    to   { opacity: 1; translate: 0 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body [class*="_compose_components_attachments__mediaUpload"]:not([class*="mediaUploadPending"]) {
+        animation: t-tile-in 450ms var(--tng-spring) both;
+    }
+}
+@keyframes t-tile-in {
+    from { scale: 0.88; opacity: 0; }
+    to   { scale: 1; opacity: 1; }
+}
+.app-body .media-gallery__item {
+    overflow: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body .media-gallery__item-thumbnail img {
+        transition: scale 900ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    :root:not(.reduce-motion) .app-body .media-gallery__item-thumbnail:hover img {
+        scale: 1.04;
+    }
+}
+.app-body [class*="_comp_card__root"] {
+    transition: background-color 200ms ease-in-out, border-color 200ms ease-in-out;
+}
+.app-body [class*="_comp_card__root"]:is(:has(a[class*="primaryCardLink"]:hover), :not([class*="rootUnclickable"], :has(a[class*="primaryCardLink"]), :has(a:hover)):hover) {
+    border-color: var(--color-accent-lines);
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body :is(img[class*="_comp_card__image"], [class*="_comp_card__image"] > *) {
+        transition: scale 900ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    :root:not(.reduce-motion) .app-body [class*="_comp_card__root"]:is(:has(a[class*="primaryCardLink"]:hover), :not([class*="rootUnclickable"], :has(a[class*="primaryCardLink"]), :has(a:hover)):hover) :is(img[class*="_comp_card__image"], [class*="_comp_card__image"] > *) {
+        scale: 1.05;
+    }
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body [class*="_feat_compose__counterError"] {
+        display: inline-block;
+        animation: t-shake 420ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+}
+@keyframes t-shake {
+    10%, 90% { translate: -1px 0; }
+    20%, 80% { translate: 2px 0; }
+    30%, 50%, 70% { translate: -3px 0; }
+    40%, 60% { translate: 3px 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body .column-settings {
+        animation: t-panel-in 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+}
+@keyframes t-panel-in {
+    from { opacity: 0; translate: 0 -8px; }
+    to   { opacity: 1; translate: 0 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body [class*="_comp_account_header__followButton"] > svg {
+        animation: t-pop-in 450ms var(--tng-spring) both;
+    }
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body [class*="_comp_form_fields_checkbox__checkbox"]:checked::before {
+        animation: t-tick-pop 320ms var(--tng-spring);
+    }
+}
+@keyframes t-tick-pop {
+    from { scale: 0.3; }
+    to   { scale: 1; }
+}
 .app-body :is([class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
     --bg: var(--color-accent-bg);
     --fg: var(--color-accent);
