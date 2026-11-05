@@ -9870,6 +9870,33 @@ a:is(.active,
     outline-offset: 6px;
     border-radius: 8px;
 }
+.admin-wrapper :is(input[type="checkbox"], input[type="radio"]),
+.form-container :is(input[type="checkbox"], input[type="radio"]) {
+    accent-color: var(--color-accent);
+}
+.admin-wrapper input[type="file"],
+.form-container input[type="file"] {
+    color: var(--color-content-fg-muted);
+    font: inherit;
+}
+.admin-wrapper input[type="file"]::file-selector-button,
+.form-container input[type="file"]::file-selector-button {
+    appearance: none;
+    margin-inline-end: 12px;
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 999px;
+    background-color: var(--color-accent-bg);
+    color: var(--color-accent);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .2s;
+}
+.admin-wrapper input[type="file"]::file-selector-button:hover,
+.form-container input[type="file"]::file-selector-button:hover {
+    background-color: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
+}
 /* On narrow displays the sidebar swaps the big logo for the Mastodon wordmark
    (.logo--wordmark). Its "m" is a hard-coded gradient inside a <use> symbol that
    CSS can't recolour, so hide it and show a themed copy of the wordmark (accent
