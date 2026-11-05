@@ -186,7 +186,7 @@
     --color-border-media: rgba(255, 255, 255, 0.15);
 }
 
-:root:root:is([data-theme-color], :has([class*="_comp_columns_area_"])),
+:root:root:is([data-theme-color], :has([class*="_comp_columns_area_"], .form-container)),
 .app-body [data-color-scheme] {
     --base-color-bg: var(--color-content-bg);
     --base-color-bg-desktop: var(--color-bg);
@@ -9875,12 +9875,30 @@ a:is(.active,
    These pages live outside .app-body and use <img class="logo logo--icon"
    src="logo.svg">, which can't be recoloured via fill — so replace the image
    content with the themed logo. */
-.sidebar-wrapper .logo--icon,
-.logo-container .logo {
+.sidebar-wrapper .logo--icon {
     content: var(--logo);
     width: 100px;
     height: 100px;
     object-fit: contain;
+}
+.logo-container .logo {
+    display: none;
+}
+.logo-container > a,
+.logo-container:not(:has(> a)) {
+    display: block;
+    width: 174px;
+    height: 44px;
+    margin-inline: auto;
+    background-image: var(--logo-wordmark);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.logo-container > a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 6px;
+    border-radius: 8px;
 }
 /* On narrow displays the sidebar swaps the big logo for the Mastodon wordmark
    (.logo--wordmark). Its "m" is a hard-coded gradient inside a <use> symbol that
