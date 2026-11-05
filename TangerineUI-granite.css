@@ -5816,7 +5816,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
    new class is matched on the input only: the icon wrapper's class starts
    with the same name (…__searchIcon). */
 .app-body .search__input:where(:not(.active), .active),
-.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"]) {
+.app-body input[class*="_comp_search__search"] {
     border-radius: 8px;
     background-color: var(--color-accent-bg);
     color: var(--color-content-fg);
@@ -5833,20 +5833,20 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     border-radius: 8px;
 }
 .app-body .search__input::placeholder,
-.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"])::placeholder,
+.app-body input[class*="_comp_search__search"]::placeholder,
 .app-body .compose-form .spoiler-input__input::placeholder {
     font-weight: 500;
     color: var(--color-accent);
 }
 .app-body .search__input:focus,
-.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"]):focus {
+.app-body input[class*="_comp_search__search"]:focus {
     border-color: var(--color-accent);
     background-color: var(--color-content-bg);
     outline: 3px solid var(--color-accent-bg);
     border-radius: 8px;
 }
 .app-body .search__input:focus::placeholder,
-.app-body input:is([class*="_components_search__search"], [class*="_comp_search__search"]):focus::placeholder,
+.app-body input[class*="_comp_search__search"]:focus::placeholder,
 .app-body .compose-form .spoiler-input__input:focus::placeholder {
     color: var(--color-content-fg);
     opacity: .4;
@@ -7363,7 +7363,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body [cla
     transform-origin: center;
     animation: t-modal-open 250ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-.app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"]) {
+.app-body [class*="_feat_compose_trigger__composer"] {
     transform-origin: bottom center;
     animation:
         t-spring-rise 400ms var(--tng-spring),
@@ -7562,12 +7562,12 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     75%  { rotate: 3deg; }
     100% { rotate: 0deg; }
 }
-.app-body :is([class*="_compose_redesign__root"], [class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
+.app-body :is([class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
     --bg: var(--color-accent-bg);
     --fg: var(--color-accent);
     --bg-hover: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
 }
-.app-body :is([class*="_compose_redesign__root"], [class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"]:is([aria-pressed="true"], [aria-expanded="true"]) {
+.app-body :is([class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"]:is([aria-pressed="true"], [aria-expanded="true"]) {
     --bg: var(--color-accent);
     --fg: var(--color-accent-fg);
     background-color: var(--bg);
@@ -7586,10 +7586,10 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     initial-value: 0px;
 }
 @media (min-width: 760px) {
-    .app-body :is([class*="_compose_redesign_trigger__root"], [class*="_feat_compose_trigger__root"]) {
+    .app-body [class*="_feat_compose_trigger__root"] {
         padding-bottom: 16px;
     }
-    .app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"]),
+    .app-body [class*="_feat_compose_trigger__composer"],
     .app-body [class*="_comp_columns_area__main"]::after {
         margin-inline: 28px;
         max-height: calc(100vh - 48px);
@@ -7609,11 +7609,11 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
             --tng-composer-open 220ms cubic-bezier(0.4, 0, 1, 1),
             --tng-composer-height 0s 220ms;
     }
-    html:has(:is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"])) {
+    html:has([class*="_feat_compose_trigger__composer"]) {
         --tng-composer-open: 1;
         transition: none;
     }
-    html:has(:is([class*="_compose_redesign_trigger__composerMinimized"], [class*="_feat_compose_trigger__composerMinimized"])) {
+    html:has([class*="_feat_compose_trigger__composerMinimized"]) {
         --tng-composer-height: calc(var(--current-composer-height, 0px) + 16px);
     }
     .app-body [class*="_comp_columns_area__main"]::after {
@@ -7633,7 +7633,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
         transform-origin: bottom center;
         filter: blur(calc((1 - var(--tng-composer-open)) * 2px));
     }
-    html:has(:is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"])) .app-body [class*="_comp_columns_area__main"]::after {
+    html:has([class*="_feat_compose_trigger__composer"]) .app-body [class*="_comp_columns_area__main"]::after {
         visibility: hidden;
     }
 }
@@ -7642,11 +7642,11 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
         transition: none;
     }
 }
-.app-body :is([class*="_compose_redesign__header"], [class*="_feat_compose__header"]) {
+.app-body [class*="_feat_compose__header"] {
     position: relative;
     align-items: center;
 }
-.app-body :is([class*="_compose_redesign__header"], [class*="_feat_compose__header"]) > h2 {
+.app-body [class*="_feat_compose__header"] > h2 {
     position: absolute;
     inset: 0;
     display: flex;
@@ -7655,7 +7655,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     margin: 0;
     pointer-events: none;
 }
-.app-body :is([class*="_compose_redesign__header"], [class*="_feat_compose__header"]) > h2 + * {
+.app-body [class*="_feat_compose__header"] > h2 + * {
     margin-inline-start: auto;
 }
 .app-body [class*="_feat_compose__counter"] {
@@ -7666,7 +7666,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
 .app-body [class*="_feat_compose__counterError"] {
     color: var(--color-text-error);
 }
-.app-body textarea:is([class*="_compose_redesign__textarea"], [class*="_feat_compose__textarea"]):focus-visible {
+.app-body textarea[class*="_feat_compose__textarea"]:focus-visible {
     outline: none;
 }
 
@@ -7756,8 +7756,6 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(
 .app-body .notification-group__main > [class*="_comp_card__root"]:not([class*="_comp_card__rootUnclickable"]) {
     cursor: pointer;
 }
-.app-body [class*="_feat_account_edit__editButton"],
-.app-body .button[class*="_feat_account_edit__editButton"],
 .app-body .button[class*="verifiedLinkHelpButton"],
 .app-body .button[class*="verifiedLinkHelpButton"]:is(:active, :focus) {
     border-color: transparent;
@@ -7765,15 +7763,9 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(
     background-color: var(--color-accent-bg);
     color: var(--color-accent);
 }
-.app-body [class*="_feat_account_edit__editButton"]:is(:hover, :focus-visible),
-.app-body .button[class*="_feat_account_edit__editButton"]:is(:hover, :focus-visible),
 .app-body .button[class*="verifiedLinkHelpButton"]:hover {
     background-color: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
     color: var(--color-accent);
-}
-.app-body [class*="_feat_account_edit__deleteButton"]:is(:hover, :focus-visible) {
-    background-color: color-mix(in srgb, var(--color-reject) 16%, transparent);
-    color: var(--color-reject);
 }
 .app-body [class*="_feat_account_edit__imageButton"] {
     border-color: rgb(255 255 255 / .18);
@@ -7814,7 +7806,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(
 }
 @media (prefers-reduced-motion: reduce) {
     .app-body .modal-root__container > [class*="_comp_modal_shell_redesign__modal"],
-    .app-body :is([class*="_compose_redesign_trigger__composer"], [class*="_feat_compose_trigger__composer"]) {
+    .app-body [class*="_feat_compose_trigger__composer"] {
         animation: none;
     }
 }
@@ -9826,7 +9818,7 @@ a:is(.active,
 /* Pinned badge: match the other post-header labels (boosted / show thread) —
    fully-rounded pill, page background, muted bold text, accent icon; reset the
    line-height it inherits from .status__info (which clipped the label). */
-.app-body ._feat_account_timeline__pinnedBadge {
+.app-body ._comp_status_header__pinnedBadge {
     line-height: normal;
     background-color: var(--color-bg);
     border-radius: 50px;
@@ -9834,11 +9826,11 @@ a:is(.active,
     font-weight: 600;
     padding: 4px 10px;
 }
-.app-body ._feat_account_timeline__pinnedBadge ._comp_badge__content {
+.app-body ._comp_status_header__pinnedBadge ._comp_badge__content {
     line-height: normal;
     overflow: visible;
 }
-.app-body ._feat_account_timeline__pinnedBadge .icon-pinned {
+.app-body ._comp_status_header__pinnedBadge .icon-pinned {
     fill: var(--color-accent);
     color: var(--color-accent);
 }
