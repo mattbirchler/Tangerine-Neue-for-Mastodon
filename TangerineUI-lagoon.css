@@ -7714,6 +7714,15 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
         animation: t-pop-in 450ms var(--tng-spring) both;
     }
 }
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body [class*="_comp_form_fields_checkbox__checkbox"]:checked::before {
+        animation: t-tick-pop 320ms var(--tng-spring);
+    }
+}
+@keyframes t-tick-pop {
+    from { scale: 0.3; }
+    to   { scale: 1; }
+}
 .app-body :is([class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
     --bg: var(--color-accent-bg);
     --fg: var(--color-accent);
