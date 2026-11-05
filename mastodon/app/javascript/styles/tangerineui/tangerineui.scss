@@ -7690,6 +7690,17 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     from { scale: 0.88; opacity: 0; }
     to   { scale: 1; opacity: 1; }
 }
+.app-body .media-gallery__item {
+    overflow: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+    :root:not(.reduce-motion) .app-body .media-gallery__item-thumbnail img {
+        transition: scale 900ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    :root:not(.reduce-motion) .app-body .media-gallery__item-thumbnail:hover img {
+        scale: 1.04;
+    }
+}
 .app-body :is([class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
     --bg: var(--color-accent-bg);
     --fg: var(--color-accent);
