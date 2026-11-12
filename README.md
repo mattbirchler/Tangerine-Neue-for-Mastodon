@@ -269,12 +269,9 @@ cp -r ./mastodon/app/javascript/styles/* $LIVE/app/javascript/styles
 cp -r ./mastodon/config/locales/tangerineui.yml $LIVE/config/locales
 ```
 
-4. **Add Tangerine Neue to `themes.yml`**. So that Tangerine Neue can be selected as an available option in your users' settings, you need to edit the `themes.yml` file located in your Mastodon installation under `config/themes.yml`. In this file, add 5 new lines, one for each variant of Tangerine Neue, as follows:
+4. **Add Tangerine Neue to `themes.yml`**. So that Tangerine Neue can be selected as an available option in your users' settings, you need to edit the `themes.yml` file located in your Mastodon installation under `config/themes.yml`. Leave the existing contents as they are (they differ between Mastodon versions) and add 5 new lines at the end of the file, one for each variant of Tangerine Neue:
 
 ```yml
-default: styles/application.scss
-contrast: styles/contrast.scss
-mastodon-light: styles/mastodon-light.scss
 tangerineui: styles/tangerineui.scss
 tangerineui-purple: styles/tangerineui-purple.scss
 tangerineui-cherry: styles/tangerineui-cherry.scss
