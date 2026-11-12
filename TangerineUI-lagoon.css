@@ -9,7 +9,7 @@
 
 /* 📄 Meta */
 :root {
-    --version: "v3.0.0-beta.5";
+    --version: "v3.0.0-beta.6";
 
     --variant-name: "Lagoon";
     --variant-emoji: "\1F420\00A0";
@@ -730,7 +730,7 @@ body.app-body  {
     --font-body: Fredoka, ui-rounded, "SF Pro Rounded", "mastodon-font-sans-serif", Inter, sans-serif;
     --font-heading: Fredoka, ui-rounded, "SF Pro Rounded", "mastodon-font-sans-serif", Inter, sans-serif;
 }
-.app-body :is([class*="_comp_button_redesign__base"], [class*="_comp_button_redesign__label"], .button, .display-name strong, .display-name__html, [class*="_comp_status_header__nameLink"], [class*="_navigation_panel_redesign_navigation_link__label"]) {
+.app-body :is(:is([class*="_comp_button_redesign__base"], [class*="_comp_button__base"]), :is([class*="_comp_button_redesign__label"], [class*="_comp_button__label"]), .button, .display-name strong, .display-name__html, [class*="_comp_status_header__nameLink"], :is([class*="_navigation_panel_redesign_navigation_link__label"], [class*="_feat_navigation_panel_navigation_link__label"])) {
     font-weight: 600;
 }
 
@@ -3396,7 +3396,7 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
     inherits: true;
     initial-value: 0;
 }
-.app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"] {
+.app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"]) {
     --tng-pop: 0;
     --tng-ring: min(1, var(--tng-pop) * 2.2);
     --tng-burst: clamp(0, (var(--tng-pop) - .08) * 1.5, 1);
@@ -3407,8 +3407,8 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
     isolation: isolate;
 }
 @media (prefers-reduced-motion: no-preference) {
-    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::before,
-    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::after {
+    .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"])::before,
+    .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"])::after {
         content: '';
         position: absolute;
         top: 50%;
@@ -3418,22 +3418,22 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
         z-index: -1;
         translate: -50% -50%;
     }
-    [dir="rtl"] .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::before,
-    [dir="rtl"] .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::after {
+    [dir="rtl"] .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"])::before,
+    [dir="rtl"] .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"])::after {
         translate: 50% -50%;
     }
-    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"][class*="_comp_button_redesign__iconOnly"]::before,
-    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"][class*="_comp_button_redesign__iconOnly"]::after {
+    .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"]):is([class*="_comp_button_redesign__iconOnly"], [class*="_comp_button__iconOnly"])::before,
+    .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"]):is([class*="_comp_button_redesign__iconOnly"], [class*="_comp_button__iconOnly"])::after {
         inset-inline-start: 50%;
     }
-    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::before {
+    .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"])::before {
         width: 40px;
         height: 40px;
         box-shadow: inset 0 0 0 calc(1px + 6px * (1 - var(--tng-ring))) color-mix(in srgb, var(--tng-burst-color), transparent 40%);
         scale: calc(.35 + var(--tng-ring) * .8);
         opacity: calc(var(--tng-visible) * (1 - var(--tng-ring) * var(--tng-ring)));
     }
-    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::after {
+    .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"])::after {
         --r: calc(9px + 17px * sin(var(--tng-burst) * 90deg));
         --ri: calc(var(--r) * .72);
         --s: calc(2.2px * (1 - var(--tng-burst)));
@@ -3461,42 +3461,42 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
             calc(var(--ri) * -.9239) calc(var(--ri) * -.3827) 0 var(--si) var(--c2),
             calc(var(--ri) * -.3827) calc(var(--ri) * -.9239) 0 var(--si) var(--c1);
     }
-    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"] > svg {
+    .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"]) > svg {
         transform-origin: center;
     }
-    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"][aria-pressed="true"] {
+    .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"])[aria-pressed="true"] {
         --tng-pop: 1;
     }
-    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"][aria-pressed="true"] {
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"])[aria-pressed="true"] {
         transition: background-color .2s, color .2s, opacity .2s, scale 450ms var(--tng-spring), --tng-pop .85s linear;
     }
     :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_status__actionsButtonGap"][aria-pressed="true"] > svg {
         scale: calc(1 + .55 * sin(var(--tng-pop) * 540deg) * (1 - var(--tng-pop)) * (1 - var(--tng-pop)));
         rotate: calc(-16deg * sin(var(--tng-pop) * 720deg) * (1 - var(--tng-pop)));
     }
-    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]:not([class*="_comp_status__actionsButtonGap"], [class*="_comp_button_redesign__iconOnly"]) {
+    .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"]):not([class*="_comp_status__actionsButtonGap"], :is([class*="_comp_button_redesign__iconOnly"], [class*="_comp_button__iconOnly"])) {
         --tng-burst-color-alt: color-mix(in srgb, var(--color-accent), var(--color-content-fg-bold) 25%);
     }
-    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]:not([class*="_comp_status__actionsButtonGap"], [class*="_comp_button_redesign__iconOnly"])[aria-pressed="true"] {
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"]):not([class*="_comp_status__actionsButtonGap"], :is([class*="_comp_button_redesign__iconOnly"], [class*="_comp_button__iconOnly"]))[aria-pressed="true"] {
         transition: background-color .2s, color .2s, opacity .2s, scale 450ms var(--tng-spring), --tng-pop .9s cubic-bezier(.2, 1.25, .4, 1);
     }
-    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]:not([class*="_comp_status__actionsButtonGap"], [class*="_comp_button_redesign__iconOnly"])[aria-pressed="true"] > svg {
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"]):not([class*="_comp_status__actionsButtonGap"], :is([class*="_comp_button_redesign__iconOnly"], [class*="_comp_button__iconOnly"]))[aria-pressed="true"] > svg {
         rotate: calc(var(--tng-pop) * 360deg);
         scale: calc(1 + .35 * sin(min(var(--tng-pop), 1) * 180deg));
     }
-    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__iconOnly"][aria-pressed="true"] {
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__iconOnly"], [class*="_comp_button__iconOnly"])[aria-pressed="true"] {
         transition: background-color .2s, color .2s, opacity .2s, scale 450ms var(--tng-spring), --tng-pop .6s linear;
     }
-    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__iconOnly"][aria-pressed="true"] > svg {
+    :root:not(.reduce-motion) .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__iconOnly"], [class*="_comp_button__iconOnly"])[aria-pressed="true"] > svg {
         translate: 0 calc(-7px * sin(min(var(--tng-pop) * 1.6, 1) * 180deg));
         scale: calc(1 + .22 * sin(clamp(0, var(--tng-pop) * 1.6 - .6, 1) * 180deg) * -1) calc(1 + .22 * sin(clamp(0, var(--tng-pop) * 1.6 - .6, 1) * 180deg));
     }
-    .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__iconOnly"]::after {
+    .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__iconOnly"], [class*="_comp_button__iconOnly"])::after {
         display: none;
     }
 }
-:root.reduce-motion .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::before,
-:root.reduce-motion .app-body [class*="_comp_status__actions"] > button[class*="_comp_button_redesign__toggle"]::after {
+:root.reduce-motion .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"])::before,
+:root.reduce-motion .app-body [class*="_comp_status__actions"] > button:is([class*="_comp_button_redesign__toggle"], [class*="_comp_button__toggle"])::after {
     display: none;
 }
 .app-body .status__action-bar .icon-button,
@@ -3998,7 +3998,7 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 .app-body .spoiler-button:hover ~ .media-gallery__item > .media-gallery__preview {
     outline: 1px solid var(--color-lines-translucent);
 }
-.app-body .media-gallery__actions__pill:not([class*="_comp_button_redesign"]) {
+.app-body .media-gallery__actions__pill:not([class*="_comp_button_redesign"], [class*="_comp_button__"]) {
     border-radius: 6px;
     padding: 3px 8px;
     font-weight: 500;
@@ -4019,7 +4019,7 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
     font-weight: bold;
 }
 
-.app-body :is(.media-gallery__alt__label, .media-gallery__gifv__label):not([class*="_comp_button_redesign"]) {
+.app-body :is(.media-gallery__alt__label, .media-gallery__gifv__label):not([class*="_comp_button_redesign"], [class*="_comp_button__"]) {
     background-color: rgba(0, 0, 0, .1);
     border-radius: 6px;
 }
@@ -7478,22 +7478,22 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     initial-value: 0;
 }
 @media (prefers-reduced-motion: no-preference) {
-    :root:not(.reduce-motion) .app-body [class*="_comp_button_redesign__base"] {
+    :root:not(.reduce-motion) .app-body :is([class*="_comp_button_redesign__base"], [class*="_comp_button__base"]) {
         transition: background-color 200ms, color 200ms, opacity 200ms, scale 450ms var(--tng-spring);
     }
-    :root:not(.reduce-motion) .app-body [class*="_comp_button_redesign__base"]:active:not(:disabled, [aria-disabled="true"]) {
+    :root:not(.reduce-motion) .app-body :is([class*="_comp_button_redesign__base"], [class*="_comp_button__base"]):active:not(:disabled, [aria-disabled="true"]) {
         scale: 0.92;
         transition: background-color 200ms, color 200ms, opacity 200ms, scale 90ms cubic-bezier(0.22, 1, 0.36, 1) !important;
     }
-    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__link"].active {
+    :root:not(.reduce-motion) .app-body :is([class*="_navigation_panel_redesign_navigation_link__link"], [class*="_feat_navigation_panel_navigation_link__link"]).active {
         --tng-nav: 1;
         transition: background-color 200ms, color 200ms, --tng-nav 550ms linear;
     }
-    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__link"].active [class*="_navigation_panel_redesign_navigation_link__icon"] > svg {
+    :root:not(.reduce-motion) .app-body :is([class*="_navigation_panel_redesign_navigation_link__link"], [class*="_feat_navigation_panel_navigation_link__link"]).active :is([class*="_navigation_panel_redesign_navigation_link__icon"], [class*="_feat_navigation_panel_navigation_link__icon"]) > svg {
         scale: calc(1 + .45 * sin(var(--tng-nav) * 540deg) * (1 - var(--tng-nav)) * (1 - var(--tng-nav)));
         rotate: calc(-12deg * sin(var(--tng-nav) * 360deg) * (1 - var(--tng-nav)));
     }
-    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__link"]:active {
+    :root:not(.reduce-motion) .app-body :is([class*="_navigation_panel_redesign_navigation_link__link"], [class*="_feat_navigation_panel_navigation_link__link"]):active {
         scale: 0.97;
     }
     :root:not(.reduce-motion) .app-body [class*="_comp_menu__card"] {
@@ -7517,13 +7517,13 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-end"] { --tng-menu-origin: top left; --tng-menu-from: inset(0 30% 30% 0 round var(--radius-4, 16px)); }
     [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-start"] { --tng-menu-origin: bottom right; --tng-menu-from: inset(30% 0 0 30% round var(--radius-4, 16px)); }
     [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-end"] { --tng-menu-origin: bottom left; --tng-menu-from: inset(30% 30% 0 0 round var(--radius-4, 16px)); }
-    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__badge"],
-    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__iconWithDot"]::after {
+    :root:not(.reduce-motion) .app-body :is([class*="_navigation_panel_redesign_navigation_link__badge"], [class*="_feat_navigation_panel_navigation_link__badge"]),
+    :root:not(.reduce-motion) .app-body :is([class*="_navigation_panel_redesign_navigation_link__iconWithDot"], [class*="_feat_navigation_panel_navigation_link__iconWithDot"])::after {
         animation:
             t-pop-in 450ms var(--tng-spring),
             t-fade-in 120ms ease-out;
     }
-    :root:not(.reduce-motion) .app-body [class*="_navigation_panel_redesign_navigation_link__link"]:has([class*="_navigation_panel_redesign_navigation_link__badge"], [class*="_navigation_panel_redesign_navigation_link__iconWithDot"]) [class*="_navigation_panel_redesign_navigation_link__icon"] > svg {
+    :root:not(.reduce-motion) .app-body :is([class*="_navigation_panel_redesign_navigation_link__link"], [class*="_feat_navigation_panel_navigation_link__link"]):has(:is([class*="_navigation_panel_redesign_navigation_link__badge"], [class*="_feat_navigation_panel_navigation_link__badge"]), :is([class*="_navigation_panel_redesign_navigation_link__iconWithDot"], [class*="_feat_navigation_panel_navigation_link__iconWithDot"])) :is([class*="_navigation_panel_redesign_navigation_link__icon"], [class*="_feat_navigation_panel_navigation_link__icon"]) > svg {
         transform-origin: 50% 10%;
         animation: t-bell-wiggle 700ms ease-in-out 150ms;
     }
@@ -7723,12 +7723,12 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     from { scale: 0.3; }
     to   { scale: 1; }
 }
-.app-body :is([class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"] {
+.app-body :is([class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) :is([class*="_comp_button_redesign__neutral"], [class*="_comp_button__neutral"]):is([class*="_comp_button_redesign__tonal"], [class*="_comp_button__tonal"]) {
     --bg: var(--color-accent-bg);
     --fg: var(--color-accent);
     --bg-hover: color-mix(in srgb, var(--color-accent), var(--color-accent-bg) 80%);
 }
-.app-body :is([class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) [class*="_comp_button_redesign__neutral"][class*="_comp_button_redesign__tonal"]:is([aria-pressed="true"], [aria-expanded="true"]) {
+.app-body :is([class*="_feat_compose__root"], [class*="_comp_account_header__buttons"]) :is([class*="_comp_button_redesign__neutral"], [class*="_comp_button__neutral"]):is([class*="_comp_button_redesign__tonal"], [class*="_comp_button__tonal"]):is([aria-pressed="true"], [aria-expanded="true"]) {
     --bg: var(--color-accent);
     --fg: var(--color-accent-fg);
     background-color: var(--bg);
@@ -7832,42 +7832,42 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
 }
 
 /* 🧭 Sidebar order (5.0) */
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) {
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) {
     --tng-nav-inset: 16px;
 }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) > :is(ul[class*="_navigation_panel_redesign__list"], footer[class*="_navigation_panel_redesign__footer"]),
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] ul[class*="_navigation_panel_redesign__footerNav"] {
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) > :is(ul:is([class*="_navigation_panel_redesign__list"], [class*="_feat_navigation_panel__list"]), footer:is([class*="_navigation_panel_redesign__footer"], [class*="_feat_navigation_panel__footer"])),
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"]) {
     display: contents;
 }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) > :first-child { order: -1; }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) > :last-child { order: 99; }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] :is(ul[class*="_navigation_panel_redesign__list"], ul[class*="_navigation_panel_redesign__footerNav"]) > li {
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) > :first-child { order: -1; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) > :last-child { order: 99; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] :is(ul:is([class*="_navigation_panel_redesign__list"], [class*="_feat_navigation_panel__list"]), ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) > li {
     order: 10;
     margin-inline: var(--tng-nav-inset);
 }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href="/home"]) { order: 1; }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href="/notifications"]) { order: 2; }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a:is([href="/explore"], [href="/search"])) { order: 3; }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href^="/public"]) { order: 4; }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href="/conversations"]) { order: 5; }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href="/bookmarks"]) { order: 6; }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] li:has(> a[href^="/admin"]) { order: 7; }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) [class*="_navigation_panel_redesign__newPostButton"] {
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] li:has(> a[href="/home"]) { order: 1; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] li:has(> a[href="/notifications"]) { order: 2; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] li:has(> a:is([href="/explore"], [href="/search"])) { order: 3; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] li:has(> a[href^="/public"]) { order: 4; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] li:has(> a[href="/conversations"]) { order: 5; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] li:has(> a[href="/bookmarks"]) { order: 6; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] li:has(> a[href^="/admin"]) { order: 7; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) :is([class*="_navigation_panel_redesign__newPostButton"], [class*="_feat_navigation_panel__newPostButton"]) {
     order: 8;
     margin: 0 var(--tng-nav-inset);
     padding-block: 12px 4px;
 }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) [class*="_navigation_panel_redesign_account_card_and_menu__root"] {
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) :is([class*="_navigation_panel_redesign_account_card_and_menu__root"], [class*="_feat_navigation_panel_account_card_and_menu__root"]) {
     order: 0;
     width: auto;
     margin: 0 var(--tng-nav-inset) 16px;
 }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"]:has(ul[class*="_navigation_panel_redesign__footerNav"]) footer[class*="_navigation_panel_redesign__footer"] > :last-child {
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) footer:is([class*="_navigation_panel_redesign__footer"], [class*="_feat_navigation_panel__footer"]) > :last-child {
     order: 21;
     margin: auto 24px 0;
     padding-bottom: 24px;
 }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] [class*="_navigation_panel_redesign_navigation_link__linkStacked"] {
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] :is([class*="_navigation_panel_redesign_navigation_link__linkStacked"], [class*="_feat_navigation_panel_navigation_link__linkStacked"]) {
     flex-direction: row;
     row-gap: 0;
     padding-inline: var(--space-2, 8px);
@@ -7876,13 +7876,13 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     line-height: var(--lh-tight);
     letter-spacing: var(--ls-normal);
 }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] [class*="_navigation_panel_redesign_navigation_link__linkStacked"][aria-current="page"] {
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] :is([class*="_navigation_panel_redesign_navigation_link__linkStacked"], [class*="_feat_navigation_panel_navigation_link__linkStacked"])[aria-current="page"] {
     font-weight: bold;
 }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] [class*="_navigation_panel_redesign_navigation_link__linkStacked"] [class*="_navigation_panel_redesign_navigation_link__label"] {
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] :is([class*="_navigation_panel_redesign_navigation_link__linkStacked"], [class*="_feat_navigation_panel_navigation_link__linkStacked"]) :is([class*="_navigation_panel_redesign_navigation_link__label"], [class*="_feat_navigation_panel_navigation_link__label"]) {
     text-align: start;
 }
-.app-body nav[class*="_navigation_panel_redesign__root"][data-mode="static"] [class*="_navigation_panel_redesign_navigation_link__linkStacked"] [class*="_navigation_panel_redesign_navigation_link__badge"] {
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] :is([class*="_navigation_panel_redesign_navigation_link__linkStacked"], [class*="_feat_navigation_panel_navigation_link__linkStacked"]) :is([class*="_navigation_panel_redesign_navigation_link__badge"], [class*="_feat_navigation_panel_navigation_link__badge"]) {
     position: static;
 }
 html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(.load-more, .load-gap) {
@@ -7939,17 +7939,17 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body :is(
 .app-body [class*="_feat_account_edit__imageButton"]:hover {
     background-color: rgb(0 0 0 / .65);
 }
-.app-body [class*="_comp_button_redesign__base"] .loading-indicator {
+.app-body :is([class*="_comp_button_redesign__base"], [class*="_comp_button__base"]) .loading-indicator {
     position: static;
     transform: none;
     color: inherit;
 }
-.app-body [class*="_comp_button_redesign__base"] .loading-indicator .circular-progress {
+.app-body :is([class*="_comp_button_redesign__base"], [class*="_comp_button__base"]) .loading-indicator .circular-progress {
     width: 16px;
     height: 16px;
     color: inherit;
 }
-.app-body [data-color-scheme] [class*="_comp_button_redesign__contrastOnMedia"]:not([class*="_comp_button_redesign__accent"], [class*="_comp_button_redesign__destructive"]) {
+.app-body [data-color-scheme] :is([class*="_comp_button_redesign__contrastOnMedia"], [class*="_comp_button__onMedia"], [class*="_comp_button__media"]):not(:is([class*="_comp_button_redesign__accent"], [class*="_comp_button__accent"]), :is([class*="_comp_button_redesign__destructive"], [class*="_comp_button__destructive"])) {
     --bg: rgb(0 0 0 / .5);
     --bg-hover: rgb(0 0 0 / .65);
     --fg: #ffffff;
