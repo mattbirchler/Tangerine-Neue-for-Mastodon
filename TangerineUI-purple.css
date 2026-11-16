@@ -159,7 +159,7 @@
     --color-border-media: rgba(255, 255, 255, 0.15);
 }
 
-:root:root:is([data-theme-color], :has([class*="_comp_columns_area_"], .form-container)),
+:root:root:is([data-theme-color], :has([class*="_comp_columns_area_"], .form-container, .admin-wrapper > .content-wrapper:last-child)),
 .app-body [data-color-scheme] {
     --base-color-bg: var(--color-content-bg);
     --base-color-bg-desktop: var(--color-bg);
@@ -7517,13 +7517,13 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="bottom-end"] { --tng-menu-origin: top left; --tng-menu-from: inset(0 30% 30% 0 round var(--radius-4, 16px)); }
     [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-start"] { --tng-menu-origin: bottom right; --tng-menu-from: inset(30% 0 0 30% round var(--radius-4, 16px)); }
     [dir="rtl"] .app-body [class*="_comp_menu__card"][data-popover-placement="top-end"] { --tng-menu-origin: bottom left; --tng-menu-from: inset(30% 30% 0 0 round var(--radius-4, 16px)); }
-    :root:not(.reduce-motion) .app-body :is([class*="_navigation_panel_redesign_navigation_link__badge"], [class*="_feat_navigation_panel_navigation_link__badge"]),
+    :root:not(.reduce-motion) .app-body :is([class*="_navigation_panel_redesign_navigation_link__badge"], [class*="_feat_navigation_panel_navigation_link__badge"], [class*="_feat_navigation_panel_navigation_link__miniBadge"]),
     :root:not(.reduce-motion) .app-body :is([class*="_navigation_panel_redesign_navigation_link__iconWithDot"], [class*="_feat_navigation_panel_navigation_link__iconWithDot"])::after {
         animation:
             t-pop-in 450ms var(--tng-spring),
             t-fade-in 120ms ease-out;
     }
-    :root:not(.reduce-motion) .app-body :is([class*="_navigation_panel_redesign_navigation_link__link"], [class*="_feat_navigation_panel_navigation_link__link"]):has(:is([class*="_navigation_panel_redesign_navigation_link__badge"], [class*="_feat_navigation_panel_navigation_link__badge"]), :is([class*="_navigation_panel_redesign_navigation_link__iconWithDot"], [class*="_feat_navigation_panel_navigation_link__iconWithDot"])) :is([class*="_navigation_panel_redesign_navigation_link__icon"], [class*="_feat_navigation_panel_navigation_link__icon"]) > svg {
+    :root:not(.reduce-motion) .app-body :is([class*="_navigation_panel_redesign_navigation_link__link"], [class*="_feat_navigation_panel_navigation_link__link"]):has(:is([class*="_navigation_panel_redesign_navigation_link__badge"], [class*="_feat_navigation_panel_navigation_link__badge"], [class*="_feat_navigation_panel_navigation_link__miniBadge"]), :is([class*="_navigation_panel_redesign_navigation_link__iconWithDot"], [class*="_feat_navigation_panel_navigation_link__iconWithDot"])) :is([class*="_navigation_panel_redesign_navigation_link__icon"], [class*="_feat_navigation_panel_navigation_link__icon"]) > svg {
         transform-origin: 50% 10%;
         animation: t-bell-wiggle 700ms ease-in-out 150ms;
     }
@@ -7662,17 +7662,6 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
 @keyframes t-tile-in {
     from { scale: 0.88; opacity: 0; }
     to   { scale: 1; opacity: 1; }
-}
-.app-body .media-gallery__item {
-    overflow: hidden;
-}
-@media (prefers-reduced-motion: no-preference) {
-    :root:not(.reduce-motion) .app-body .media-gallery__item-thumbnail img {
-        transition: scale 900ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    :root:not(.reduce-motion) .app-body .media-gallery__item-thumbnail:hover img {
-        scale: 1.04;
-    }
 }
 .app-body [class*="_comp_card__root"] {
     transition: background-color 200ms ease-in-out, border-color 200ms ease-in-out;
@@ -7841,17 +7830,17 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
 }
 .app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) > :first-child { order: -1; }
 .app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) > :last-child { order: 99; }
-.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] :is(ul:is([class*="_navigation_panel_redesign__list"], [class*="_feat_navigation_panel__list"]), ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) > li {
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) :is(ul:is([class*="_navigation_panel_redesign__list"], [class*="_feat_navigation_panel__list"]), ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) > li {
     order: 10;
     margin-inline: var(--tng-nav-inset);
 }
-.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] li:has(> a[href="/home"]) { order: 1; }
-.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] li:has(> a[href="/notifications"]) { order: 2; }
-.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] li:has(> a:is([href="/explore"], [href="/search"])) { order: 3; }
-.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] li:has(> a[href^="/public"]) { order: 4; }
-.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] li:has(> a[href="/conversations"]) { order: 5; }
-.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] li:has(> a[href="/bookmarks"]) { order: 6; }
-.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"] li:has(> a[href^="/admin"]) { order: 7; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) li:has(> a[href="/home"]) { order: 1; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) li:has(> a[href="/notifications"]) { order: 2; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) li:has(> a:is([href="/explore"], [href="/search"])) { order: 3; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) li:has(> a[href^="/public"]) { order: 4; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) li:has(> a[href="/conversations"]) { order: 5; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) li:has(> a[href="/bookmarks"]) { order: 6; }
+.app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) li:has(> a[href^="/admin"]) { order: 7; }
 .app-body nav:is([class*="_navigation_panel_redesign__root"], [class*="_feat_navigation_panel__root"])[data-mode="static"]:has(ul:is([class*="_navigation_panel_redesign__footerNav"], [class*="_feat_navigation_panel__footerNav"])) :is([class*="_navigation_panel_redesign__newPostButton"], [class*="_feat_navigation_panel__newPostButton"]) {
     order: 8;
     margin: 0 var(--tng-nav-inset);
