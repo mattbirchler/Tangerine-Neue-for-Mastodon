@@ -186,7 +186,7 @@
     --color-border-media: rgba(255, 255, 255, 0.15);
 }
 
-:root:root:is([data-theme-color], :has([class*="_comp_columns_area_"], .form-container)),
+:root:root:is([data-theme-color], :has([class*="_comp_columns_area_"], .form-container, .admin-wrapper > .content-wrapper:last-child)),
 .app-body [data-color-scheme] {
     --base-color-bg: var(--color-content-bg);
     --base-color-bg-desktop: var(--color-bg);
