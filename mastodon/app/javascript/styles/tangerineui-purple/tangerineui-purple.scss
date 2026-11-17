@@ -7754,6 +7754,11 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
     inherits: true;
     initial-value: 0px;
 }
+@property --tng-composer-modal {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+}
 @media (min-width: 760px) {
     .app-body [class*="_feat_compose_trigger__root"] {
         padding-bottom: 16px;
@@ -7772,11 +7777,23 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
             0 12px 32px -6px rgb(0 0 0 / 0.3),
             0 24px 64px -16px color-mix(in srgb, var(--color-accent) 25%, transparent);
     }
+    .app-body [class*="_feat_compose_trigger__composer"]:has(> [class*="_feat_compose_trigger__composeForm"]) {
+        margin-inline: 0;
+        border: 0;
+        border-radius: var(--radius-6, 24px);
+        background-color: transparent;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
     html {
         --tng-composer-height: var(--current-composer-height, 0px);
         transition:
             --tng-composer-open 220ms cubic-bezier(0.4, 0, 1, 1),
-            --tng-composer-height 0s 220ms;
+            --tng-composer-height 0s 220ms,
+            --tng-composer-modal 0s 220ms;
+    }
+    html:has([class*="_feat_compose_trigger__showing"], [class*="_feat_compose_trigger__minimized"]) {
+        --tng-composer-modal: 1;
     }
     html:has([class*="_feat_compose_trigger__composer"]) {
         --tng-composer-open: 1;
@@ -7796,7 +7813,7 @@ html:is([data-theme-color], :has([class*="_comp_columns_area_"])) .app-body .saf
         height: var(--tng-ghost-height);
         margin-top: calc(var(--tng-ghost-height) * -1);
         pointer-events: none;
-        opacity: var(--tng-composer-open);
+        opacity: calc(var(--tng-composer-open) * (1 - var(--tng-composer-modal)));
         translate: 0 calc((1 - var(--tng-composer-open)) * 32px);
         scale: calc(0.96 + var(--tng-composer-open) * 0.04);
         transform-origin: bottom center;
